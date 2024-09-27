@@ -28,9 +28,8 @@ public class WeightedGraphTest {
         int id1 = graph.put("Node 1");
         int id2 = graph.put("Node 2");
         
-        boolean connected = graph.setConnection(id1, id2, 5.0);
+        graph.setConnection(id1, id2, 0.5);
         
-        assertTrue(connected, "Connection should be set between valid nodes.");
         assertTrue(graph.checkEdge(id1, id2), "Graph should have an edge between Node 1 and Node 2.");
         assertEquals(5.0, graph.getEdgeWeight(id1, id2), "Edge weight should be correct.");
     }
@@ -39,9 +38,9 @@ public class WeightedGraphTest {
     public void testSetConnectionInvalidNodes() {
         int id1 = graph.put("Node 1");
         
-        boolean connected = graph.setConnection(id1, 999, 5.0);
+        graph.setConnection(id1, 999, 0.5);
         
-        assertFalse(connected, "Connection should not be set for invalid nodes.");
+        assertFalse(graph.checkEdge(id1, 999), "Connection should not be set for invalid nodes.");
     }
 
     @Test
