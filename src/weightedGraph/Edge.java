@@ -16,9 +16,9 @@ public class Edge {
 		
 		// por una razon de consistencia, prefiero que los nodos esten en orden
 		if(a > b) {
-			int t = a;
-			a = b;
-			b = t;
+			a -= b;
+			b += a;
+			a = b-a;
 		}
 		this.aNode = a;
 		this.bNode = b;
