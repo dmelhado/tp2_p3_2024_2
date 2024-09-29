@@ -79,10 +79,7 @@ public class WeightedGraph<T> {
 	}
 
 	public boolean checkEdge(int nodeA, int nodeB) {
-		if (!this.containsNode(nodeA)) {
-			return false;
-		}
-		return (this.searchEdge(nodeA, nodeB) >= 0);
+		return (this.containsNode(nodeA) && this.searchEdge(nodeA, nodeB) >= 0);
 	}
 
 	public double getEdgeWeight(int nodeA, int nodeB) {

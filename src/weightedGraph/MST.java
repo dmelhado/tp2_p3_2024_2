@@ -19,7 +19,7 @@ public class MST {
 		HashSet<Integer> setNodes = new HashSet<Integer>();
 	
 		// obtenemos primer nodo. cualquiera sirve.
-		int addedNode = (int) nodes.values().iterator().next();
+		int addedNode = nodes.keySet().iterator().next();
 		
 		// lo metemos al arbol nuevo
 		result.put(g.getData(addedNode));

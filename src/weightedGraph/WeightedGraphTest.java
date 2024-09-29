@@ -5,58 +5,58 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class WeightedGraphTest {
-    
-    private WeightedGraph<String> graph;
 
-    @BeforeEach
-    public void setUp() {
-        graph = new WeightedGraph<>();
-    }
+	private WeightedGraph<String> graph;
 
-    @Test
-    public void testPutNodes() {
-        int id1 = graph.put("Node 1");
-        int id2 = graph.put("Node 2");
-        
-        assertTrue(graph.containsNode(id1), "Graph should contain the first node.");
-        assertTrue(graph.containsNode(id2), "Graph should contain the second node.");
-        assertFalse(graph.containsNode(999), "Graph should not contain non-existing node.");
-    }
+	@BeforeEach
+	public void setUp() {
+		graph = new WeightedGraph<String>();
+	}
 
-    @Test
-    public void testSetConnectionValidNodes() {
-        int id1 = graph.put("Node 1");
-        int id2 = graph.put("Node 2");
-        
-        graph.setConnection(id1, id2, 0.5);
-        
-        assertTrue(graph.checkEdge(id1, id2), "Graph should have an edge between Node 1 and Node 2.");
-        assertEquals(5.0, graph.getEdgeWeight(id1, id2), "Edge weight should be correct.");
-    }
+	@Test
+	public void testPutNodes() {
+		int id1 = graph.put("Nodo 1");
+		int id2 = graph.put("Nodo 2");
 
-    @Test
-    public void testSetConnectionInvalidNodes() {
-        int id1 = graph.put("Node 1");
-        
-        graph.setConnection(id1, 999, 0.5);
-        
-        assertFalse(graph.checkEdge(id1, 999), "Connection should not be set for invalid nodes.");
-    }
+		assertTrue(graph.containsNode(id1), "Deberia tener el primer nodo");
+		assertTrue(graph.containsNode(id2), "Deberia tener el segundo nodo");
+		assertFalse(graph.containsNode(999), "No deberia tener uno inexistente");
+	}
 
-    @Test
-    public void testCheckEdgeNonExistentEdge() {
-        int id1 = graph.put("Node 1");
-        int id2 = graph.put("Node 2");
-        
-        assertFalse(graph.checkEdge(id1, id2), "Graph should not have an edge between unconnected nodes.");
-    }
+	@Test
+	public void testSetConnectionValidNodes() {
+		int id1 = graph.put("Nodo 1");
+		int id2 = graph.put("Nodo 2");
 
-    @Test
-    public void testGetEdgeWeightNonExistentEdge() {
-        int id1 = graph.put("Node 1");
-        int id2 = graph.put("Node 2");
+		graph.setConnection(id1, id2, 0.5);
 
-        assertThrows(RuntimeException.class, () -> graph.getEdgeWeight(id1, id2), 
-                     "Should throw an exception for non-existent edge.");
-    }
+		assertTrue(graph.checkEdge(id1, id2), "Deberia haber arista entre 1 y 2");
+		assertTrue(graph.checkEdge(id2, id1), "Deberia valer la inversa");
+		assertEquals(0.5, graph.getEdgeWeight(id1, id2), "El peso deberia ser el correcto.");
+	}
+
+	@Test
+	public void testSetConnectionInvalidNodes() {
+		int id1 = graph.put("Nodo 1");
+
+		assertThrows(RuntimeException.class, () -> graph.setConnection(id1, 999, 0.5),
+				"No deberia haber conexion entre nodos inexistentes");
+	}
+
+	@Test
+	public void testCheckEdgeNonExistentEdge() {
+		int id1 = graph.put("Node 1");
+		int id2 = graph.put("Node 2");
+
+		assertFalse(graph.checkEdge(id1, id2), "No deberia haber conexion en nodos sin conectar");
+	}
+
+	@Test
+	public void testGetEdgeWeightNonExistentEdge() {
+		int id1 = graph.put("Node 1");
+		int id2 = graph.put("Node 2");
+
+		assertThrows(RuntimeException.class, () -> graph.getEdgeWeight(id1, id2),
+				"Deberia tirar excepcion por nodos sin conectar.");
+	}
 }
