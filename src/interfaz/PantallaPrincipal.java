@@ -20,6 +20,9 @@ import javax.swing.BoxLayout;
 import java.awt.GridLayout;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+
+import weightedGraph.WeightedGraph;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
@@ -36,6 +39,7 @@ public class PantallaPrincipal extends JFrame {
 	private VentanaMenu ventanaMenu;
 	private VentanaJuego ventanaJuego;
 	private CardLayout cardLayout;
+	private WeightedGraph grafo;
 
 	/**
 	 * Launch the application.
@@ -63,11 +67,14 @@ public class PantallaPrincipal extends JFrame {
 
 		this.cardLayout = new CardLayout();
 		getContentPane().setLayout(cardLayout);
-
+		
+		this.grafo = new WeightedGraph<>();
 		this.ventanaMenu = new VentanaMenu(this);
+		this.ventanaJuego = new VentanaJuego(this, grafo);
 
 		// añade ventanas al contenedor
 		getContentPane().add(ventanaMenu, S_VENTANAMENU);
+		getContentPane().add(ventanaJuego, S_VENTANAJUEGO);
 
 		revalidate();
 		repaint();
@@ -79,11 +86,7 @@ public class PantallaPrincipal extends JFrame {
 	public void cambiarVentana(String ventana) {
 		if (ventana.equals(S_VENTANAJUEGO)) {
 			agregarMenuProyecto();
-			ventanaJuego = new VentanaJuego(this);
-			getContentPane().add(ventanaJuego, S_VENTANAJUEGO);
-			revalidate();
-			repaint();
-
+			
 		} else {
 			setJMenuBar(null);
 		}
@@ -135,6 +138,9 @@ public class PantallaPrincipal extends JFrame {
 			}
 
 		});
+	}
+	public VentanaJuego getVentanaJuego() {
+	    return ventanaJuego;
 	}
 	
 

@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -28,7 +29,7 @@ public class VentanaMenu extends JPanel {
 	private DefaultTableModel modeloTabla;
 	private JTextField textField;
 	private JTextField textField_1;
-
+	private VentanaJuego ventanaJuego;
 	public VentanaMenu(PantallaPrincipal pantallaPrincipal) {
 		this.pantallaPrincipal = pantallaPrincipal;
 		MenuJuego();
@@ -207,7 +208,36 @@ public class VentanaMenu extends JPanel {
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				
+				int numeroFila = modeloTabla.getRowCount();
+				HashMap <String, Boolean> mapaEspias = new HashMap<>();
+				for (int i = 0; i < numeroFila; i++)
+				{
+					String espia1 = modeloTabla.getValueAt(i, 0).toString().split("-")[0];	
+					String espia2 = modeloTabla.getValueAt(i, 0).toString().split("-")[1];	
+					mapaEspias.put(espia1, true);
+					mapaEspias.put(espia2, true);
+				}
+				
+				String[] espias = mapaEspias.keySet().toArray(new String[0]);
+				String[][] conexiones = new String[numeroFila][3];
+				for (int i = 0; i < numeroFila; i++)
+				{
+					String espia1 = modeloTabla.getValueAt(i, 0).toString().split("-")[0];
+					String espia2 = modeloTabla.getValueAt(i, 0).toString().split("-")[1];
+					String probabilidad = modeloTabla.getValueAt(i, 1).toString();
+					conexiones[i][0] = espia1;
+					conexiones[i][1] = espia2;
+					conexiones[i][2] = probabilidad;
+				}
+		
+		
+				
+				
 				pantallaPrincipal.cambiarVentana(pantallaPrincipal.S_VENTANAJUEGO);
+				pantallaPrincipal.getVentanaJuego().crearGrafo(espias, conexiones);
+				
 			}
 		});
 	}

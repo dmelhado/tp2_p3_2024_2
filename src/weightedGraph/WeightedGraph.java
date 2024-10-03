@@ -108,7 +108,19 @@ public class WeightedGraph<T> {
 		return this.nodes;
 	}
 	
+	
 	HashMap<Integer, Edge> getAllEdges(){
 		return this.edges;
 	}
+	
+	public int tamaño()
+	{
+		return this.nodes.size();
+	}
+	
+	public boolean esNulo()
+	{
+		return this.nodes.isEmpty();
+	}
+	
 }
