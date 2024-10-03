@@ -59,4 +59,35 @@ public class WeightedGraphTest {
 		assertThrows(RuntimeException.class, () -> graph.getEdgeWeight(id1, id2),
 				"Deberia tirar excepcion por nodos sin conectar.");
 	}
+	
+	@Test
+	public void testGrafoConexo() {
+		int id1 = graph.put("Node 1");
+		int id2 = graph.put("Node 2");
+		int id3 = graph.put("Node 3");
+		int id4 = graph.put("Node 4");
+		int id5 = graph.put("Node 5");
+		
+		graph.setConnection(id1, id2, 1);
+		graph.setConnection(id1, id3, 1);
+		graph.setConnection(id1, id4, 1);
+		graph.setConnection(id2, id5, 1);
+		
+		assertTrue(graph.esConexo());
+	}
+	
+	@Test
+	public void testGrafoDisconexo() {
+		int id1 = graph.put("Node 1");
+		int id2 = graph.put("Node 2");
+		int id3 = graph.put("Node 3");
+		int id4 = graph.put("Node 4");
+		int id5 = graph.put("Node 5");
+		
+		graph.setConnection(id1, id2, 1);
+		graph.setConnection(id2, id3, 1);
+		graph.setConnection(id4, id5, 1);
+		
+		assertFalse(graph.esConexo());
+	}
 }
