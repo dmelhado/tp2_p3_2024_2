@@ -1,6 +1,6 @@
 package weightedGraph;
 public class SpyNetwork {
-    public static void main(String[] args) {
+  /*  public static void main(String[] args) {
         WeightedGraph<Spy> spyNetwork = new WeightedGraph<>();
         
         Spy spy1 = new Spy("Dante");
@@ -17,5 +17,5 @@ public class SpyNetwork {
         spyNetwork.setConnection(spy3Id, spy1Id, 0.1);
         spyNetwork.setConnection(spy2Id, spy1Id, 0.4);
         spyNetwork.setConnection(spy3Id, spy2Id, 0.6);
-    }
+    }*/
 }
