@@ -43,8 +43,13 @@ public class VentanaAgentes {
 		frame.getContentPane().add(panel3, BorderLayout.WEST);
 		panel3.setPreferredSize(new Dimension(60, 100));
 
-		JLabel lblNewLabel_2 = new JLabel("");
+		JLabel lblNewLabel_2 = new JLabel("Ingrese nombres:");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setVerticalAlignment(SwingConstants.BOTTOM);
 		panel.add(lblNewLabel_2);
+		
+		JPanel panel1 = new JPanel();
+		frame.getContentPane().add(panel1, BorderLayout.SOUTH);
 
 		textField = new JTextField();
 		panel.add(textField);
@@ -65,18 +70,6 @@ public class VentanaAgentes {
 		JLabel lblNewLabel_1 = new JLabel("");
 		panel.add(lblNewLabel_1);
 
-		JLabel lblNewLabel_3 = new JLabel("");
-		panel.add(lblNewLabel_3);
-
-		JPanel panel1 = new JPanel();
-		frame.getContentPane().add(panel1, BorderLayout.SOUTH);
-
-		// LABELS //
-		JLabel lblNewLabel = new JLabel("Agrega un Agente");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
-		frame.getContentPane().add(lblNewLabel, BorderLayout.NORTH);
-
 		// BOTONES //
 		JButton btnNewButton_1 = new JButton("Agregar");
 		panel.add(btnNewButton_1);
@@ -93,6 +86,16 @@ public class VentanaAgentes {
 
 		});
 
+		JLabel lblNewLabel_3 = new JLabel("");
+		panel.add(lblNewLabel_3);
+
+
+		// LABELS //
+		JLabel lblNewLabel = new JLabel("Agrega un Agente");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
+		frame.getContentPane().add(lblNewLabel, BorderLayout.NORTH);
+
 		JButton btnNewButton = new JButton("Volver al Menu");
 		panel1.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
@@ -103,6 +106,8 @@ public class VentanaAgentes {
 			}
 
 		});
+		
+		
 
 	}
 
