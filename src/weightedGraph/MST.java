@@ -8,12 +8,20 @@ public class MST {
 
 	public static <T> WeightedGraph<T> generateMST(WeightedGraph<T> g) {
 		
+		if(!g.esConexo()) {
+			throw new RuntimeException("No se crear un AGM de un grafo disconexo.");
+		}
+		
 		// generamos un arbol vacio al que le vamos a meter las cosas
 		WeightedGraph<T> result = new WeightedGraph<T>();
-		
+				
 		// traemos toda la data
 		HashMap<Integer, T> nodes = g.getAllNodes();
 		HashMap<Integer, Edge> edges = g.getAllEdges();
+		
+		if(nodes.size() == 0) {
+			return result;
+		}
 		
 		// llevamos rastro de cuales nodos ya metimos
 		HashSet<Integer> setNodes = new HashSet<Integer>();

@@ -1,4 +1,4 @@
-package weightedGraph;
+package spy;
 
 public class Spy {
     private String name;

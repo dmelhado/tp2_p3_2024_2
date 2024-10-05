@@ -1,4 +1,4 @@
-package weightedGraph;
+package spy;
 public class SpyNetwork {
   /*  public static void main(String[] args) {
         WeightedGraph<Spy> spyNetwork = new WeightedGraph<>();

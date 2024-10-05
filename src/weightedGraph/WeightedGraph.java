@@ -26,6 +26,9 @@ public class WeightedGraph<T> {
 	}
 
 	public T getData(int id) {
+		if(!this.containsNode(id)) {
+			throw new RuntimeException("No se encuentra ese elemento.");
+		}
 		return this.nodes.get(id);
 	}
 
@@ -55,7 +58,7 @@ public class WeightedGraph<T> {
 
 	public int setConnection(int nodeA, int nodeB, double weight) {
 		if (!this.containsNode(nodeA) || !this.containsNode(nodeB)) {
-			throw new RuntimeException("uno de los nodos no existe");
+			throw new RuntimeException("Uno de los nodos no existe");
 		}
 
 		int edgeID = this.edgeIDGen;
@@ -88,7 +91,7 @@ public class WeightedGraph<T> {
 		int edgeID = this.searchEdge(nodeA, nodeB);
 
 		if (edgeID < 0) {
-			throw new RuntimeException("no hay conexion entre los nodos");
+			throw new RuntimeException("No hay conexion entre los nodos");
 		}
 
 		return this.edges.get(edgeID).getWeight();
@@ -156,6 +159,10 @@ public class WeightedGraph<T> {
 
 	public HashSet<Integer> getNeighbors(int nodo) {
 
+		if(!this.containsNode(nodo)) {
+			throw new RuntimeException("No se encuentra ese elemento.");
+		}
+		
 		HashSet<Integer> res = new HashSet<Integer>();
 
 		for (Edge e : this.edges.values()) {
