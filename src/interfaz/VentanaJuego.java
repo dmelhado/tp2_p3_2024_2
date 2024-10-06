@@ -5,8 +5,9 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.util.HashMap;
-
 import javax.swing.JPanel;
+
+
 
 import weightedGraph.WeightedGraph;
 
@@ -25,6 +26,7 @@ public class VentanaJuego extends JPanel {
 		setName("Temible Operario del RecontraEspionaje");
 		setBounds(100, 100, 640, 480);
 		setLayout(new BorderLayout());
+	
 
 	}
 

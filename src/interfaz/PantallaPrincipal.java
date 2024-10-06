@@ -1,34 +1,13 @@
 package interfaz;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Dimension;
-
-import javax.swing.JPanel;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-
-import java.awt.Font;
-import javax.swing.BoxLayout;
-import java.awt.GridLayout;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableModel;
-
 import weightedGraph.WeightedGraph;
-
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.FlowLayout;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 

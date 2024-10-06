@@ -20,6 +20,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+
 public class VentanaConexiones {
 
 	private JFrame frame;
@@ -31,6 +32,7 @@ public class VentanaConexiones {
 	}
 
 	private void ventanaConexiones() {
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 400, 400);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -51,7 +53,7 @@ public class VentanaConexiones {
 		JPanel panel_3 = new JPanel();
 		frame.getContentPane().add(panel_3, BorderLayout.CENTER);
 		panel_3.setLayout(new GridLayout(6, 0, 0, 0));
-
+		
 		JLabel lblNewLabel_1 = new JLabel("");
 		panel_3.add(lblNewLabel_1);
 

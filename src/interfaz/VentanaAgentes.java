@@ -70,28 +70,18 @@ public class VentanaAgentes {
 							textField.setText("");
 						}
 
-					}
 
-				});
-
-		JLabel lblNewLabel_1 = new JLabel("");
-		panel.add(lblNewLabel_1);
+					
+		JLabel lblNewLabel_2 = new JLabel("Ingrese nombres:");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setVerticalAlignment(SwingConstants.BOTTOM);
+		panel.add(lblNewLabel_2);
 		
-				// BOTONES //
-				JButton btnNewButton_1 = new JButton("Agregar");
-				panel.add(btnNewButton_1);
-				btnNewButton_1.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						String espia = textField.getText();
-						if (!espia.isEmpty()) {
-							ventanaMenu.agregarTablaEspias(espia);
-							textField.setText("");
-						}
+		JPanel panel1 = new JPanel();
+		frame.getContentPane().add(panel1, BorderLayout.SOUTH);
 
-					}
 
-				});
+				}});
 
 		JLabel lblNewLabel_3 = new JLabel("");
 		panel.add(lblNewLabel_3);
@@ -102,9 +92,31 @@ public class VentanaAgentes {
 		// LABELS //
 		JLabel lblNewLabel = new JLabel("Agrega un Agente");
 		lblNewLabel.setForeground(new Color(192, 192, 192));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
-		frame.getContentPane().add(lblNewLabel, BorderLayout.NORTH);
+		// BOTONES //
+		JButton btnNewButton_11 = new JButton("Agregar");
+		panel.add(btnNewButton_11);
+		btnNewButton_11.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String espia = textField.getText();
+				if (!espia.isEmpty()) {
+					ventanaMenu.agregarTablaEspias(espia);
+					textField.setText("");
+				}
+
+			}
+
+		});
+
+		JLabel lblNewLabel_31 = new JLabel("");
+		panel.add(lblNewLabel_31);
+
+
+		// LABELS //
+		JLabel lblNewLabel1 = new JLabel("Agrega un Agente");
+		lblNewLabel1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel1.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
+		frame.getContentPane().add(lblNewLabel1, BorderLayout.NORTH);
 
 		JButton btnNewButton = new JButton("Volver al Menu");
 		panel1.add(btnNewButton);
@@ -116,6 +128,7 @@ public class VentanaAgentes {
 			}
 
 		});
+		
 
 	}
 
