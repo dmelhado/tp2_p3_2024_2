@@ -7,8 +7,6 @@ import java.awt.RenderingHints;
 import java.util.HashMap;
 import javax.swing.JPanel;
 
-
-
 import weightedGraph.WeightedGraph;
 
 public class VentanaJuego extends JPanel {
@@ -16,7 +14,7 @@ public class VentanaJuego extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private WeightedGraph<String> grafo;
 
-	public VentanaJuego (WeightedGraph<String> grafo) {
+	public VentanaJuego(WeightedGraph<String> grafo) {
 		this.grafo = grafo;
 		iniciarJuego();
 	}
@@ -26,7 +24,6 @@ public class VentanaJuego extends JPanel {
 		setName("Temible Operario del RecontraEspionaje");
 		setBounds(100, 100, 640, 480);
 		setLayout(new BorderLayout());
-	
 
 	}
 
@@ -62,10 +59,20 @@ public class VentanaJuego extends JPanel {
 			return;
 		}
 
-		// TODO : Coordenadas para los nodos pero esta limitado a 5. Ver como hacer para
-		// poner los que sea
-		int[][] coordenadas = { { 100, 100 }, { 200, 200 }, { 300, 100 }, { 400, 200 }, { 500, 100 } };
+		int tamañoNodos = grafo.tamaño();
+		int ancho = getWidth();
+		int altura = getHeight();
 
+		int[][] coordenadas = new int[tamañoNodos][2];
+		int radio = Math.min(ancho, altura) / 3;
+		double centerX = ancho / 2.0;
+		double centerY = altura / 2.0;
+
+		for (int i = 0; i < tamañoNodos; i++) {
+			double angle = 2 * Math.PI * i / tamañoNodos;
+			coordenadas[i][0] = (int) (centerX + radio * Math.cos(angle));
+			coordenadas[i][1] = (int) (centerY + radio * Math.sin(angle));
+		}
 		// Dibuja nodos
 		for (int i = 0; i < grafo.tamaño(); i++) {
 			dibujo.fillOval(coordenadas[i][0], coordenadas[i][1], 20, 20); // Tamaño nodo
@@ -73,18 +80,17 @@ public class VentanaJuego extends JPanel {
 		}
 
 		// Dibuja conexiones (aristas)
-		for (int i = 0; i < grafo.tamaño(); i++) {
-			for (int j = 0; j < grafo.tamaño(); j++) {
+		for (int i = 0; i < tamañoNodos; i++) {
+			for (int j = 0; j < tamañoNodos; j++) {
 				if (grafo.checkEdge(i, j)) {
-					dibujo.drawLine(coordenadas[i][0] + 15, coordenadas[i][1] + 15, coordenadas[j][0] + 15,
-							coordenadas[j][1] + 15);
+					dibujo.drawLine(coordenadas[i][0] + 10, coordenadas[i][1] + 10, coordenadas[j][0] + 10,
+							coordenadas[j][1] + 10);
 					dibujo.drawString(String.format("%.2f", grafo.getEdgeWeight(i, j)),
-							(coordenadas[i][0] + coordenadas[j][0]) / 2, (coordenadas[i][1] + coordenadas[j][1]) / 2); // Peso
-																														// de
-																														// la
-																														// arista
+							(coordenadas[i][0] + coordenadas[j][0]) / 2, (coordenadas[i][1] + coordenadas[j][1]) / 2);
 				}
 			}
 		}
 	}
+	
+	
 }
