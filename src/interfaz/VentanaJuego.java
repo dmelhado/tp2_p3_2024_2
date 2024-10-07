@@ -1,22 +1,39 @@
 package interfaz;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 import weightedGraph.Edge;
 import weightedGraph.MST;
 import weightedGraph.WeightedGraph;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
+
+import java.awt.GridLayout;
+import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import javax.swing.JLabel;
 
 public class VentanaJuego extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private WeightedGraph<String> grafo;
 	private WeightedGraph<String> mst;
+	private JTable tabla;
+	private DefaultTableModel modeloTabla;
 
 	public VentanaJuego(WeightedGraph<String> grafo) {
 		this.grafo = grafo;
@@ -28,6 +45,62 @@ public class VentanaJuego extends JPanel {
 		setName("Temible Operario del RecontraEspionaje");
 		setBounds(100, 100, 640, 480);
 		setLayout(new BorderLayout());
+
+		JPanel panel = new JPanel();
+		add(panel, BorderLayout.SOUTH);
+				panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+				
+				JLabel lblNewLabel = new JLabel("                       ");
+				panel.add(lblNewLabel);
+		
+				JButton btnNewButton = new JButton("Generar Arbol Minimo");
+				panel.add(btnNewButton);
+				btnNewButton.setPreferredSize(new Dimension(170, 40));
+				
+				JPanel panelDerecho = new JPanel();
+				add(panelDerecho, BorderLayout.EAST);
+				panelDerecho.setPreferredSize(new Dimension(200, 200));
+				panelDerecho.setLayout(new BorderLayout(0, 0));
+				
+				JPanel panel_1 = new JPanel();
+				panelDerecho.add(panel_1, BorderLayout.SOUTH);
+				
+				JLabel lblNewLabel_1 = new JLabel("Riesgo Minimo:");
+				panel_1.add(lblNewLabel_1);
+				
+				JPanel panelSuperior = new JPanel();
+				add(panelSuperior, BorderLayout.NORTH);
+				panelSuperior.setPreferredSize(new Dimension(200, 50));
+				
+				
+				modeloTabla = new DefaultTableModel(new Object[] { "Arista", "Probabilidad" }, 0);
+
+				tabla = new JTable(modeloTabla);
+				JScrollPane scrollPane = new JScrollPane(tabla);
+				panelDerecho.add(scrollPane, BorderLayout.CENTER);
+				scrollPane.setPreferredSize(new Dimension(250, 150));
+				
+				JPanel panelCentral = new JPanel() {
+				    /**
+					 * 
+					 */
+					private static final long serialVersionUID = 1L;
+
+					@Override
+				    protected void paintComponent(Graphics g) {
+				        super.paintComponent(g);
+				        dibujarGrafo(g);
+				    }
+				};
+				add(panelCentral, BorderLayout.CENTER);
+		btnNewButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				calcularMST();
+				panelCentral.repaint();
+			}
+
+		});
 
 	}
 
@@ -49,12 +122,12 @@ public class VentanaJuego extends JPanel {
 
 			grafo.setConexiones(nodoA, nodoB, probabilidad);
 		}
-		calcularMST();
+
 		repaint();
 
 	}
 
-	public void paintComponent(Graphics g) {
+	public void dibujarGrafo(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D dibujo = (Graphics2D) g;
 		dibujo.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -63,6 +136,8 @@ public class VentanaJuego extends JPanel {
 		if (grafo == null || grafo.tamaño() == 0) {
 			return;
 		}
+		dibujo.setStroke(new BasicStroke(2.0f));
+		
 
 		int tamañoNodos = grafo.tamaño();
 		int ancho = getWidth();
@@ -72,7 +147,7 @@ public class VentanaJuego extends JPanel {
 		int radio = Math.min(ancho, altura) / 3;
 		double centerX = ancho / 2.0;
 		double centerY = altura / 2.0;
-		
+
 		for (int i = 0; i < tamañoNodos; i++) {
 			double angle = 2 * Math.PI * i / tamañoNodos;
 			coordenadas[i][0] = (int) (centerX + radio * Math.cos(angle));
@@ -94,37 +169,30 @@ public class VentanaJuego extends JPanel {
 				}
 			}
 		}
-		
+
 		if (mst != null) {
 			dibujo.setColor(Color.RED);
-			for (Integer idArista : mst.getTodasLasAristas().keySet())
-			{
+			dibujo.setStroke(new BasicStroke(5.0f));
+			for (Integer idArista : mst.getTodasLasAristas().keySet()) {
 				Edge arista = mst.getTodasLasAristas().get(idArista);
 				int nodoA = arista.a();
 				int nodoB = arista.b();
 				dibujo.drawLine(coordenadas[nodoA][0] + 10, coordenadas[nodoA][1] + 10, coordenadas[nodoB][0] + 10,
 						coordenadas[nodoB][1] + 10);
-				
+
 			}
-			
-							
-			}	
-	
+
+		}
+
 	}
-	
-	
-	public void calcularMST()
-	{
-		if (grafo != null && grafo.esConexo())
-		{
+
+	public void calcularMST() {
+		if (grafo != null && grafo.esConexo()) {
 			mst = MST.generateMST(grafo);
 			System.out.println(grafo);
-		} else
-		{
+		} else {
 			mst = null;
 		}
 	}
-	
-	
-	
+
 }

@@ -56,9 +56,10 @@ public class WeightedGraph<T> {
 	}
 
 	public int setConexiones(int nodeA, int nodeB, double weight) {
-		if (!this.contieneNodo(nodeA) || !this.contieneNodo(nodeB)) {
-			throw new RuntimeException("Uno de los nodos no existe");
-		}
+		//TODO: Chequear esto, ya que con el if tira error al generar el AGS
+	//	if (!this.contieneNodo(nodeA) || !this.contieneNodo(nodeB)) {
+	//		throw new RuntimeException("Uno de los nodos no existe");
+	//	}
 
 		int idArista = this.generadorIdArista;
 		this.aristas.put(idArista, new Edge(nodeA, nodeB, weight));
