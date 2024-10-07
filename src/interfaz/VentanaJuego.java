@@ -43,7 +43,7 @@ public class VentanaJuego extends JPanel {
 			int nodoA = nodos.get(espia1);
 			int nodoB = nodos.get(espia2);
 
-			grafo.setConnection(nodoA, nodoB, probabilidad);
+			grafo.setConexiones(nodoA, nodoB, probabilidad);
 		}
 		repaint();
 
@@ -67,7 +67,7 @@ public class VentanaJuego extends JPanel {
 		int radio = Math.min(ancho, altura) / 3;
 		double centerX = ancho / 2.0;
 		double centerY = altura / 2.0;
-
+		
 		for (int i = 0; i < tamañoNodos; i++) {
 			double angle = 2 * Math.PI * i / tamañoNodos;
 			coordenadas[i][0] = (int) (centerX + radio * Math.cos(angle));
@@ -78,19 +78,20 @@ public class VentanaJuego extends JPanel {
 			dibujo.fillOval(coordenadas[i][0], coordenadas[i][1], 20, 20); // Tamaño nodo
 			dibujo.drawString(grafo.getData(i), coordenadas[i][0], coordenadas[i][1] - 10); // Etiqueta del nodo
 		}
-
 		// Dibuja conexiones (aristas)
 		for (int i = 0; i < tamañoNodos; i++) {
 			for (int j = 0; j < tamañoNodos; j++) {
-				if (grafo.checkEdge(i, j)) {
+				if (grafo.consultarArista(i, j)) {
 					dibujo.drawLine(coordenadas[i][0] + 10, coordenadas[i][1] + 10, coordenadas[j][0] + 10,
 							coordenadas[j][1] + 10);
-					dibujo.drawString(String.format("%.2f", grafo.getEdgeWeight(i, j)),
+					dibujo.drawString(String.format("%.2f", grafo.getPesoArista(i, j)),
 							(coordenadas[i][0] + coordenadas[j][0]) / 2, (coordenadas[i][1] + coordenadas[j][1]) / 2);
 				}
 			}
 		}
+	
 	}
+	
 	
 	
 }

@@ -20,9 +20,9 @@ public class WeightedGraphTest {
 		int id1 = graph.put("Nodo 1");
 		int id2 = graph.put("Nodo 2");
 
-		assertTrue(graph.containsNode(id1), "Deberia tener el primer nodo");
-		assertTrue(graph.containsNode(id2), "Deberia tener el segundo nodo");
-		assertFalse(graph.containsNode(999), "No deberia tener uno inexistente");
+		assertTrue(graph.contieneNodo(id1), "Deberia tener el primer nodo");
+		assertTrue(graph.contieneNodo(id2), "Deberia tener el segundo nodo");
+		assertFalse(graph.contieneNodo(999), "No deberia tener uno inexistente");
 	}
 
 	@Test
@@ -30,18 +30,18 @@ public class WeightedGraphTest {
 		int id1 = graph.put("Nodo 1");
 		int id2 = graph.put("Nodo 2");
 
-		graph.setConnection(id1, id2, 0.5);
+		graph.setConexiones(id1, id2, 0.5);
 
-		assertTrue(graph.checkEdge(id1, id2), "Deberia haber arista entre 1 y 2");
-		assertTrue(graph.checkEdge(id2, id1), "Deberia valer la inversa");
-		assertEquals(0.5, graph.getEdgeWeight(id1, id2), "El peso deberia ser el correcto.");
+		assertTrue(graph.consultarArista(id1, id2), "Deberia haber arista entre 1 y 2");
+		assertTrue(graph.consultarArista(id2, id1), "Deberia valer la inversa");
+		assertEquals(0.5, graph.getPesoArista(id1, id2), "El peso deberia ser el correcto.");
 	}
 
 	@Test
 	public void testSetConnectionInvalidNodes() {
 		int id1 = graph.put("Nodo 1");
 
-		assertThrows(RuntimeException.class, () -> graph.setConnection(id1, 999, 0.5),
+		assertThrows(RuntimeException.class, () -> graph.setConexiones(id1, 999, 0.5),
 				"No deberia haber conexion entre nodos inexistentes");
 	}
 
@@ -50,7 +50,7 @@ public class WeightedGraphTest {
 		int id1 = graph.put("Node 1");
 		int id2 = graph.put("Node 2");
 
-		assertFalse(graph.checkEdge(id1, id2), "No deberia haber conexion en nodos sin conectar");
+		assertFalse(graph.consultarArista(id1, id2), "No deberia haber conexion en nodos sin conectar");
 	}
 
 	@Test
@@ -58,7 +58,7 @@ public class WeightedGraphTest {
 		int id1 = graph.put("Node 1");
 		int id2 = graph.put("Node 2");
 
-		assertThrows(RuntimeException.class, () -> graph.getEdgeWeight(id1, id2),
+		assertThrows(RuntimeException.class, () -> graph.getPesoArista(id1, id2),
 				"Deberia tirar excepcion por nodos sin conectar.");
 	}
 	
@@ -70,10 +70,10 @@ public class WeightedGraphTest {
 		int id4 = graph.put("Node 4");
 		int id5 = graph.put("Node 5");
 		
-		graph.setConnection(id1, id2, 1);
-		graph.setConnection(id1, id3, 1);
-		graph.setConnection(id1, id4, 1);
-		graph.setConnection(id2, id5, 1);
+		graph.setConexiones(id1, id2, 1);
+		graph.setConexiones(id1, id3, 1);
+		graph.setConexiones(id1, id4, 1);
+		graph.setConexiones(id2, id5, 1);
 		
 		assertTrue(graph.esConexo());
 	}
@@ -86,9 +86,9 @@ public class WeightedGraphTest {
 		int id4 = graph.put("Node 4");
 		int id5 = graph.put("Node 5");
 		
-		graph.setConnection(id1, id2, 1);
-		graph.setConnection(id2, id3, 1);
-		graph.setConnection(id4, id5, 1);
+		graph.setConexiones(id1, id2, 1);
+		graph.setConexiones(id2, id3, 1);
+		graph.setConexiones(id4, id5, 1);
 		
 		assertFalse(graph.esConexo());
 	}

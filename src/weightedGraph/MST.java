@@ -13,70 +13,68 @@ public class MST {
 		}
 		
 		// generamos un arbol vacio al que le vamos a meter las cosas
-		WeightedGraph<T> result = new WeightedGraph<T>();
+		WeightedGraph<T> resultado = new WeightedGraph<T>();
 				
 		// traemos toda la data
-		HashMap<Integer, T> nodes = g.getAllNodes();
-		HashMap<Integer, Edge> edges = g.getAllEdges();
+		HashMap<Integer, T> nodos = g.getTodosLosNodos();
+		HashMap<Integer, Edge> aristas = g.getTodasLasAristas();
 		
-		if(nodes.size() == 0) {
-			return result;
+		if(nodos.size() == 0) {
+			return resultado;
 		}
 		
 		// llevamos rastro de cuales nodos ya metimos
-		HashSet<Integer> setNodes = new HashSet<Integer>();
+		HashSet<Integer> setNodos = new HashSet<Integer>();
 	
 		// obtenemos primer nodo. cualquiera sirve.
-		int addedNode = nodes.keySet().iterator().next();
+		int nodoAñadido = nodos.keySet().iterator().next();
 		
 		// lo metemos al arbol nuevo
-		result.put(g.getData(addedNode));
-		setNodes.add(addedNode);
+		resultado.put(g.getData(nodoAñadido));
+		setNodos.add(nodoAñadido);
 		
 		// ciclamos hasta haber agregado todos los nodos
-		while(setNodes.size() < nodes.size()) {
+		while(setNodos.size() < nodos.size()) {
 			
 			// traemos la minima arista disponible
-			Edge minimumEdge = minimumAvailableEdge(setNodes, edges.values());
+			Edge aristaMinima = minimumAvailableEdge(setNodos, aristas.values());
 			
 			// realmente no sabemos cual es el nodo de la arista que hay que agregar
-			if(setNodes.contains(minimumEdge.a())) {
-				addedNode = minimumEdge.b();
+			if(setNodos.contains(aristaMinima.a())) {
+				nodoAñadido = aristaMinima.b();
 			}
-			if(setNodes.contains(minimumEdge.b())) {
-				addedNode = minimumEdge.a();
+			if(setNodos.contains(aristaMinima.b())) {
+				nodoAñadido = aristaMinima.a();
 			}
 			
 			// agregamos todo
-			result.put(g.getData(addedNode));
-			result.setConnection(minimumEdge.a(), minimumEdge.b(), minimumEdge.getWeight());
-			setNodes.add(addedNode);
+			resultado.put(g.getData(nodoAñadido));
+			resultado.setConexiones(aristaMinima.a(), aristaMinima.b(), aristaMinima.getPeso());			setNodos.add(nodoAñadido);
 		}		
-		return result;
-		
+		return resultado;	
 	}
 	
 	// devuelve la arista con menor peso que no este conectada a alguno de los nodos
-	private static Edge minimumAvailableEdge(HashSet<Integer> nodes, Collection<Edge> allEdges) {
-		double minWeight = Double.POSITIVE_INFINITY;
-		Edge result = null;
+	private static Edge minimumAvailableEdge(HashSet<Integer> nodos, Collection<Edge> todasLasAristas) {
+		double pesoMinimo = Double.POSITIVE_INFINITY;
+		Edge resultado = null;
 		
 		// TODO: esta implementacion es horrible. considerar usar un MinHeap de aristas ordenados por peso en lugar de for's anidados
-		for(Edge edge : allEdges) {
-			for(Integer n : nodes) {
+		for(Edge arista : todasLasAristas) {
+			for(Integer n : nodos) {
 				
 				// si se cumplen estas 3 condiciones, actualizamos el minimo
-				boolean isConnected = edge.connects(n);
-				boolean otherEndIsNotInCurrentNodes = !nodes.contains(edge.getOtherEnd(n));
-				boolean weightLowerThanResult = minWeight > edge.getWeight();
+				boolean estaConectado = arista.connects(n);
+				boolean otroExtremoNoEstaEnNodosActuales = !nodos.contains(arista.getOtroExtremo(n));
+				boolean pesoInferiorAlResultado = pesoMinimo > arista.getPeso();
 				
-				if(isConnected && otherEndIsNotInCurrentNodes && weightLowerThanResult) {
-						minWeight = edge.getWeight();
-						result = edge;
+				if(estaConectado && otroExtremoNoEstaEnNodosActuales && pesoInferiorAlResultado) {
+						pesoMinimo = arista.getPeso();
+						resultado = arista;
 				}
 			}
 		}
-		return result;
+		return resultado;
 	}
 
 }

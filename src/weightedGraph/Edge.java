@@ -2,9 +2,9 @@ package weightedGraph;
 
 public class Edge {
 
-	private int aNode;
-	private int bNode;
-	private double weight;
+	private int nodoA;
+	private int nodoB;
+	private double peso;
 	
 	public Edge(int a, int b, double w) {
 		if(w < 0 || w > 1) {
@@ -20,28 +20,28 @@ public class Edge {
 			b += a;
 			a = b-a;
 		}
-		this.aNode = a;
-		this.bNode = b;
-		this.weight = w;
+		this.nodoA = a;
+		this.nodoB = b;
+		this.peso = w;
 	}
 	
-	public double getWeight() {
-		return this.weight;
+	public double getPeso() {
+		return this.peso;
 	}
 	
-	public void setWeight(double newWeight) {
-		this.weight = newWeight;
+	public void setPeso(double nuevoPeso) {
+		this.peso = nuevoPeso;
 	}
 
 	public int a() {
-		return aNode;
+		return nodoA;
 	}
 	
 	public int b() {
-		return bNode;
+		return nodoB;
 	}
 
-	public boolean areConnected(int x, int y) {
+	public boolean estanConectados(int x, int y) {
 		return (x != y && this.connects(x) && this.connects(y));
 	}
 	
@@ -50,7 +50,7 @@ public class Edge {
 	}
 	
 	// devuelve la otra punta de la arista
-	public int getOtherEnd(int in) {
+	public int getOtroExtremo(int in) {
 		int out = -1;
 		if(this.a() == in) {
 			out = this.b();
