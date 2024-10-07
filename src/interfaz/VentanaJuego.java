@@ -1,18 +1,22 @@
 package interfaz;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.util.HashMap;
 import javax.swing.JPanel;
 
+import weightedGraph.Edge;
+import weightedGraph.MST;
 import weightedGraph.WeightedGraph;
 
 public class VentanaJuego extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private WeightedGraph<String> grafo;
+	private WeightedGraph<String> mst;
 
 	public VentanaJuego(WeightedGraph<String> grafo) {
 		this.grafo = grafo;
@@ -45,6 +49,7 @@ public class VentanaJuego extends JPanel {
 
 			grafo.setConexiones(nodoA, nodoB, probabilidad);
 		}
+		calcularMST();
 		repaint();
 
 	}
@@ -89,7 +94,35 @@ public class VentanaJuego extends JPanel {
 				}
 			}
 		}
+		
+		if (mst != null) {
+			dibujo.setColor(Color.RED);
+			for (Integer idArista : mst.getTodasLasAristas().keySet())
+			{
+				Edge arista = mst.getTodasLasAristas().get(idArista);
+				int nodoA = arista.a();
+				int nodoB = arista.b();
+				dibujo.drawLine(coordenadas[nodoA][0] + 10, coordenadas[nodoA][1] + 10, coordenadas[nodoB][0] + 10,
+						coordenadas[nodoB][1] + 10);
+				
+			}
+			
+							
+			}	
 	
+	}
+	
+	
+	public void calcularMST()
+	{
+		if (grafo != null && grafo.esConexo())
+		{
+			mst = MST.generateMST(grafo);
+			System.out.println(grafo);
+		} else
+		{
+			mst = null;
+		}
 	}
 	
 	

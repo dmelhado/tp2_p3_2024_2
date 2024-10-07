@@ -20,7 +20,7 @@ public class WeightedGraph<T> {
 
 	public int put(T data) {
 		int idNodo = this.generadorIdNodo;
-		this.nodos.put(this.generadorIdNodo, data);
+		this.nodos.put(idNodo, data);
 		this.generadorIdNodo++;
 		return idNodo;
 	}
@@ -111,7 +111,7 @@ public class WeightedGraph<T> {
 		return this.nodos;
 	}
 
-	HashMap<Integer, Edge> getTodasLasAristas() {
+	public HashMap<Integer, Edge> getTodasLasAristas() {
 		return this.aristas;
 	}
 
