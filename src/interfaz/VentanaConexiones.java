@@ -68,7 +68,7 @@ public class VentanaConexiones {
 
 		JComboBox<String> comboBox_1 = new JComboBox<String>();
 		panel_4.add(comboBox_1);
-
+		
 		DefaultComboBoxModel<String> espia1 = new DefaultComboBoxModel<>(listaEspias.toArray(new String[0]));
 		DefaultComboBoxModel<String> espia2 = new DefaultComboBoxModel<>(listaEspias.toArray(new String[0]));
 
