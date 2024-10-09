@@ -34,6 +34,7 @@ public class VentanaJuego extends JPanel {
 	private WeightedGraph<String> mst;
 	private JTable tabla;
 	private DefaultTableModel modeloTabla;
+	private JPanel panelCentral;
 
 	public VentanaJuego(WeightedGraph<String> grafo) {
 		this.grafo = grafo;
@@ -80,10 +81,7 @@ public class VentanaJuego extends JPanel {
 				panelDerecho.add(scrollPane, BorderLayout.CENTER);
 				scrollPane.setPreferredSize(new Dimension(250, 150));
 				
-				JPanel panelCentral = new JPanel() {
-				    /**
-					 * 
-					 */
+				panelCentral = new JPanel() {
 					private static final long serialVersionUID = 1L;
 
 					@Override
@@ -97,6 +95,7 @@ public class VentanaJuego extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				calcularMST();
+				panelCentral.revalidate();
 				panelCentral.repaint();
 			}
 
@@ -140,8 +139,8 @@ public class VentanaJuego extends JPanel {
 		
 
 		int tamañoNodos = grafo.tamaño();
-		int ancho = getWidth();
-		int altura = getHeight();
+		int ancho = panelCentral.getWidth();
+		int altura = panelCentral.getHeight();
 
 		int[][] coordenadas = new int[tamañoNodos][2];
 		int radio = Math.min(ancho, altura) / 3;
@@ -189,10 +188,29 @@ public class VentanaJuego extends JPanel {
 	public void calcularMST() {
 		if (grafo != null && grafo.esConexo()) {
 			mst = MST.generateMST(grafo);
+			actualizarTablaMST();
 			System.out.println(grafo);
 		} else {
 			mst = null;
 		}
 	}
 
+
+
+	public void actualizarTablaMST()
+	{
+		modeloTabla.setRowCount(0);
+		if (mst != null)
+		{
+			for (Integer idArista : mst.getTodasLasAristas().keySet())
+			{
+				Edge arista = mst.getTodasLasAristas().get(idArista);
+				String nodoA = grafo.getData(arista.a());
+				String nodoB = grafo.getData(arista.b());
+				double probabilidad = arista.getPeso();
+				
+				modeloTabla.addRow(new Object[] { nodoA + "-" + nodoB, String.format("%.2f", probabilidad) });
+			}
+		}
+	}
 }

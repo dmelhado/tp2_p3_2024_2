@@ -27,6 +27,7 @@ public class VentanaMenu extends JPanel {
 	private DefaultTableModel modeloTablaEspias;
 	private JTable table;
 	private ArrayList<String> listaEspias;
+	private VentanaConexiones ventanaConexiones;
 
 	public VentanaMenu(PantallaPrincipal pantallaPrincipal) {
 		this.pantallaPrincipal = pantallaPrincipal;
@@ -181,5 +182,6 @@ public class VentanaMenu extends JPanel {
 	{
 		modeloTabla.setRowCount(0);
 		modeloTablaEspias.setRowCount(0);
+		
 	}
 }
