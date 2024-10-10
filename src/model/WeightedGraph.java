@@ -1,10 +1,12 @@
-package weightedGraph;
+package model;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-public class WeightedGraph<T> {
+import controller.Observador;
+
+public class WeightedGraph<T> extends Observador {
 
 	private HashMap<Integer, T> nodos;
 	private HashMap<Integer, Edge> aristas;
@@ -22,6 +24,7 @@ public class WeightedGraph<T> {
 		int idNodo = this.generadorIdNodo;
 		this.nodos.put(idNodo, data);
 		this.generadorIdNodo++;
+		notificarObservador();
 		return idNodo;
 	}
 
@@ -50,7 +53,7 @@ public class WeightedGraph<T> {
 				this.aristas.remove(i);
 			}
 		}
-
+		notificarObservador();
 		this.aristas.remove(nodeID);
 		return true;
 	}
@@ -64,6 +67,7 @@ public class WeightedGraph<T> {
 		int idArista = this.generadorIdArista;
 		this.aristas.put(idArista, new Edge(nodeA, nodeB, weight));
 		this.generadorIdArista++;
+		notificarObservador();
 		return idArista;
 	}
 
@@ -104,6 +108,7 @@ public class WeightedGraph<T> {
 		if (edgeID < 0) {
 			return false;
 		}
+		notificarObservador();
 		this.aristas.remove(edgeID);
 		return true;
 	}

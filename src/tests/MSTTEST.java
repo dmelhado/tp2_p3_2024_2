@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import weightedGraph.WeightedGraph;
-import weightedGraph.MST;
+import model.MST;
+import model.WeightedGraph;
 
 public class MSTTEST {
 

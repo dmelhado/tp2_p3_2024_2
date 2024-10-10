@@ -1,4 +1,4 @@
-package interfaz;
+package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,7 +16,6 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.ImageIcon;
 
 public class VentanaMenu extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -103,16 +101,19 @@ public class VentanaMenu extends JPanel {
 			}
 
 		});
-		
+
 		JButton btnNewButton_3 = new JButton("Limpiar Tablas");
 		btnNewButton_3.setPreferredSize(new Dimension(150, 50));
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (ventanaConexiones != null) {
+					ventanaConexiones.limpiarComboBox();
+				}
 				limpiarTablas();
 			}
 		});
 		panelButtom.add(btnNewButton_3);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("                              ");
 		panelButtom.add(lblNewLabel_1);
 
@@ -125,7 +126,9 @@ public class VentanaMenu extends JPanel {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaConexiones ventanaConexiones = new VentanaConexiones(VentanaMenu.this);
+				if (ventanaConexiones == null) {
+					ventanaConexiones = new VentanaConexiones(VentanaMenu.this);
+				}
 				ventanaConexiones.abrirVentana();
 			}
 
@@ -155,7 +158,7 @@ public class VentanaMenu extends JPanel {
 				}
 
 				pantallaPrincipal.cambiarVentana(pantallaPrincipal.S_VENTANAJUEGO);
-				pantallaPrincipal.getVentanaJuego().crearGrafo(espias, conexiones);
+				pantallaPrincipal.getControladorJuego().crearGrafo(espias, conexiones);
 
 			}
 		});
@@ -166,6 +169,10 @@ public class VentanaMenu extends JPanel {
 		DefaultTableModel modeloTablaEspias = (DefaultTableModel) table.getModel();
 		modeloTablaEspias.addRow(new Object[] { nombreEspia });
 		listaEspias.add(nombreEspia);
+		if (ventanaConexiones != null) {
+			ventanaConexiones.actualizarComboBoxes();
+		}
+
 	}
 
 	public ArrayList<String> obtenerEspias() {
@@ -177,11 +184,12 @@ public class VentanaMenu extends JPanel {
 		modeloTablaAristas.addRow(new Object[] { espia1 + "-" + espia2, probabilidad });
 
 	}
-	
-	public void limpiarTablas()
-	{
+
+	public void limpiarTablas() {
+
 		modeloTabla.setRowCount(0);
 		modeloTablaEspias.setRowCount(0);
-		
+		listaEspias.clear();
+
 	}
 }

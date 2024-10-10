@@ -1,4 +1,4 @@
-package weightedGraph;
+package model;
 
 public class Edge {
 

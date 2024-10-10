@@ -1,4 +1,4 @@
-package interfaz;
+package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -20,11 +20,12 @@ import javax.swing.event.ChangeListener;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-
 public class VentanaConexiones {
 
 	private JFrame frame;
 	private VentanaMenu ventanaMenu;
+	private JComboBox<String> comboBox;
+	private JComboBox<String> comboBox_1;
 
 	public VentanaConexiones(VentanaMenu ventanaMenu) {
 		this.ventanaMenu = ventanaMenu;
@@ -32,7 +33,7 @@ public class VentanaConexiones {
 	}
 
 	private void ventanaConexiones() {
-		
+
 		frame = new JFrame();
 		frame.setBounds(100, 100, 400, 400);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -53,7 +54,7 @@ public class VentanaConexiones {
 		JPanel panel_3 = new JPanel();
 		frame.getContentPane().add(panel_3, BorderLayout.CENTER);
 		panel_3.setLayout(new GridLayout(6, 0, 0, 0));
-		
+
 		JLabel lblNewLabel_1 = new JLabel("");
 		panel_3.add(lblNewLabel_1);
 
@@ -61,19 +62,11 @@ public class VentanaConexiones {
 		panel_3.add(panel_4);
 		panel_4.setLayout(new GridLayout(2, 2, 0, 0));
 
-		ArrayList<String> listaEspias = ventanaMenu.obtenerEspias();
-
-		JComboBox<String> comboBox = new JComboBox<String>();
+		comboBox = new JComboBox<String>();
 		panel_4.add(comboBox);
 
-		JComboBox<String> comboBox_1 = new JComboBox<String>();
+		comboBox_1 = new JComboBox<String>();
 		panel_4.add(comboBox_1);
-		
-		DefaultComboBoxModel<String> espia1 = new DefaultComboBoxModel<>(listaEspias.toArray(new String[0]));
-		DefaultComboBoxModel<String> espia2 = new DefaultComboBoxModel<>(listaEspias.toArray(new String[0]));
-
-		comboBox.setModel(espia1);
-		comboBox_1.setModel(espia2);
 
 		JPanel panel_5 = new JPanel();
 		panel_3.add(panel_5);
@@ -153,6 +146,21 @@ public class VentanaConexiones {
 	}
 
 	public void abrirVentana() {
+		actualizarComboBoxes();
 		frame.setVisible(true);
+	}
+
+	public void actualizarComboBoxes() {
+		ArrayList<String> listaEspias = ventanaMenu.obtenerEspias();
+		DefaultComboBoxModel<String> espia1 = new DefaultComboBoxModel<>(listaEspias.toArray(new String[0]));
+		DefaultComboBoxModel<String> espia2 = new DefaultComboBoxModel<>(listaEspias.toArray(new String[0]));
+
+		comboBox.setModel(espia1);
+		comboBox_1.setModel(espia2);
+	}
+
+	public void limpiarComboBox() {
+		comboBox.removeAllItems();
+		comboBox_1.removeAllItems();
 	}
 }
