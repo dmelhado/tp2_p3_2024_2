@@ -17,6 +17,8 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import controller.VentanaConexionesControlador;
+
 public class VentanaMenu extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private PantallaPrincipal pantallaPrincipal;
@@ -128,6 +130,9 @@ public class VentanaMenu extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (ventanaConexiones == null) {
 					ventanaConexiones = new VentanaConexiones(VentanaMenu.this);
+					VentanaConexionesControlador controlador = new VentanaConexionesControlador(ventanaConexiones, VentanaMenu.this);
+					ventanaConexiones.setControlador(controlador);
+					
 				}
 				ventanaConexiones.abrirVentana();
 			}

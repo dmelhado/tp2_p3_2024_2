@@ -17,6 +17,9 @@ import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import controller.VentanaConexionesControlador;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -26,6 +29,7 @@ public class VentanaConexiones {
 	private VentanaMenu ventanaMenu;
 	private JComboBox<String> comboBox;
 	private JComboBox<String> comboBox_1;
+	private VentanaConexionesControlador controlador;
 
 	public VentanaConexiones(VentanaMenu ventanaMenu) {
 		this.ventanaMenu = ventanaMenu;
@@ -135,11 +139,7 @@ public class VentanaConexiones {
 				String espia1 = (String) comboBox.getSelectedItem();
 				String espia2 = (String) comboBox_1.getSelectedItem();
 				String probabilidadTexto = lblNewLabel_5.getText();
-				if (espia1 != null && espia2 != null) {
-					Double.parseDouble(probabilidadTexto.replace(",", "."));
-					ventanaMenu.agregarTablaAristaProbabilidad(espia1, espia2, probabilidadTexto);
-
-				}
+				controlador.agregarArista(espia1, espia2, probabilidadTexto);
 			}
 		});
 		panel_6.add(btnNewButton_1);
@@ -162,5 +162,10 @@ public class VentanaConexiones {
 	public void limpiarComboBox() {
 		comboBox.removeAllItems();
 		comboBox_1.removeAllItems();
+	}
+
+	public void setControlador(VentanaConexionesControlador controlador) {
+		this.controlador = controlador;
+		
 	}
 }
