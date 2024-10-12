@@ -1,6 +1,8 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import model.Edge;
 import model.MST;
@@ -38,13 +40,15 @@ public class VentanaJuegoControlador {
 			grafo.setConexiones(nodoA, nodoB, probabilidad);
 		}
 
-		ventana.actualizarGrafo(grafo);
-
 	}
 	
 	 public HashMap<Integer, int[]> calcularCoordenadas(int ancho, int altura) {
 	        HashMap<Integer, int[]> coordenadas = new HashMap<>();
 	        int tamañoNodos = grafo.tamaño();
+	        if (tamañoNodos == 0)
+	        {
+	        	return coordenadas;
+	        }
 	        double radio = Math.min(ancho, altura) / 3;
 	        double centerX = ancho / 2.0;
 	        double centerY = altura / 2.0;
@@ -58,14 +62,52 @@ public class VentanaJuegoControlador {
 
 	        return coordenadas;
 	    }
+	 
+	 public List<int[]> obtenerDatosAristas() {
+			List<int[]> aristasDatos = new ArrayList<>();
+			for(int i = 0; i < grafo.tamaño(); i++) {
+				for (int j = i + 1; j < grafo.tamaño(); j++) {
+					if (grafo.consultarArista(i, j))
+					{
+						int[] datos = {i, j};
+						aristasDatos.add(datos);
+					}
+				}
+			}
+			return aristasDatos;
+		}
+	 
+	 public List<int[]> obtenerDatosMST() {
+			List<int[]> mstDatos = new ArrayList<>();
+			if (mst != null) {
+				for (Edge arista : mst.getTodasLasAristas().values()) {
+					int[] datos = { arista.a(), arista.b() };
+					mstDatos.add(datos);
+				} 
+			}
+			return mstDatos;
+		}
+	 
 	
 	public void calcularMST()
 	{
 		if (grafo != null && grafo.esConexo()) {
 			mst = MST.generateMST(grafo);
-			ventana.setMST(mst);
-			ventana.actualizarTablaMST();
-			System.out.println(grafo);
+			
+			Object[][] datos = new Object[mst.getTodasLasAristas().size()][2];
+			int puntero = 0;
+			for (Integer idArista : mst.getTodasLasAristas().keySet())
+			{
+				Edge arista = mst.getTodasLasAristas().get(idArista);
+				String nodoA = grafo.getData(arista.a());
+				String nodoB = grafo.getData(arista.b());
+				double probabilidad = arista.getPeso();
+				datos[puntero++] = new Object[] { nodoA + "-" + nodoB, String.format("%.2f", probabilidad) };
+
+			}
+			ventana.actualizarTablaMST(datos);
+			ventana.actualizar();
+			
 		} else {
 			mst = null;
 		}
@@ -95,4 +137,15 @@ public class VentanaJuegoControlador {
 		return riesgoMinimo;
 	}
 
+	public String getNombreNodo(int i) {
+		return grafo.getData(i);
+	}
+
+
+	public String getPesoArista(int nodoA, int nodoB) {
+		
+		return String.format("%.2f", grafo.getPesoArista(nodoA, nodoB));
+	}
+	
+		
 }

@@ -16,7 +16,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-import controller.VentanaConexionesControlador;
+
 import controller.VentanaMenuControlador;
 
 public class VentanaMenu extends JPanel {
@@ -27,7 +27,6 @@ public class VentanaMenu extends JPanel {
 	private DefaultTableModel modeloTablaEspias;
 	private JTable table;
 	private ArrayList<String> listaEspias;
-	private VentanaConexiones ventanaConexiones;
 	private VentanaMenuControlador controlador;
 
 	public VentanaMenu(PantallaPrincipal pantallaPrincipal) {
@@ -169,7 +168,6 @@ public class VentanaMenu extends JPanel {
 	}
 
 	public DefaultTableModel getModeloTabla() {
-
 		return modeloTabla;
 	}
 }

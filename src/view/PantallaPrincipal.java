@@ -56,7 +56,7 @@ public class PantallaPrincipal extends JFrame {
 		this.grafo = new WeightedGraph<>();
 		this.ventanaMenu = new VentanaMenu(this);
 		this.controladorMenu = new VentanaMenuControlador(ventanaMenu, this);
-		this.ventanaJuego = new VentanaJuego(grafo);
+		this.ventanaJuego = new VentanaJuego(controlador);
 		this.controlador = new VentanaJuegoControlador(grafo, ventanaJuego);
 
 		// añade ventanas al contenedor
