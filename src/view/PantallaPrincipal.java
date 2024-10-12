@@ -9,6 +9,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import controller.VentanaJuegoControlador;
+import controller.VentanaMenuControlador;
 import model.WeightedGraph;
 
 import java.awt.event.ActionListener;
@@ -17,12 +18,13 @@ import java.awt.event.ActionEvent;
 public class PantallaPrincipal extends JFrame {
 	private static final long serialVersionUID = 1L;
 	final static String S_VENTANAMENU = "Ventana Menu";
-	final String S_VENTANAJUEGO = "Ventana Juego";
+	private final String S_VENTANAJUEGO = "Ventana Juego";
 	private VentanaMenu ventanaMenu;
 	private VentanaJuego ventanaJuego;
 	private CardLayout cardLayout;
 	private WeightedGraph<String> grafo;
 	private VentanaJuegoControlador controlador;
+	private VentanaMenuControlador controladorMenu;
 
 	/**
 	 * Launch the application.
@@ -53,12 +55,13 @@ public class PantallaPrincipal extends JFrame {
 
 		this.grafo = new WeightedGraph<>();
 		this.ventanaMenu = new VentanaMenu(this);
+		this.controladorMenu = new VentanaMenuControlador(ventanaMenu, this);
 		this.ventanaJuego = new VentanaJuego(grafo);
 		this.controlador = new VentanaJuegoControlador(grafo, ventanaJuego);
 
 		// añade ventanas al contenedor
 		getContentPane().add(ventanaMenu, S_VENTANAMENU);
-		getContentPane().add(ventanaJuego, S_VENTANAJUEGO);
+		getContentPane().add(ventanaJuego, getS_VENTANAJUEGO());
 
 		revalidate();
 		repaint();
@@ -68,7 +71,7 @@ public class PantallaPrincipal extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	public void cambiarVentana(String ventana) {
-		if (ventana.equals(S_VENTANAJUEGO)) {
+		if (ventana.equals(getS_VENTANAJUEGO())) {
 			agregarMenuProyecto();
 
 		} else {
@@ -130,6 +133,10 @@ public class PantallaPrincipal extends JFrame {
 
 	public VentanaJuegoControlador getControladorJuego() {
 		return controlador;
+	}
+
+	public String getS_VENTANAJUEGO() {
+		return S_VENTANAJUEGO;
 	}
 
 }
