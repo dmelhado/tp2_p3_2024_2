@@ -1,13 +1,13 @@
 package controller;
 
-import view.VentanaAgentes;
+import view.VentanaEspias;
 import view.VentanaMenu;
 
-public class VentanaAgentesControlador {
-	private VentanaAgentes ventanaAgentes;
+public class VentanaEspiasControlador {
+	private VentanaEspias ventanaAgentes;
 	private VentanaMenu ventanaMenu;
 	
-	public VentanaAgentesControlador(VentanaAgentes ventanaAgentes, VentanaMenu ventanaMenu)
+	public VentanaEspiasControlador(VentanaEspias ventanaAgentes, VentanaMenu ventanaMenu)
 	{
 		this.ventanaAgentes = ventanaAgentes;
 		this.ventanaMenu = ventanaMenu;		
@@ -18,7 +18,7 @@ public class VentanaAgentesControlador {
 	public void agregarEspia(String espia)
 	{
 		if (!espia.isEmpty()) {
-			ventanaMenu.agregarTablaEspias(espia);
+			ventanaMenu.getControlador().verificarEspia(espia);
 		}
 	}
 	

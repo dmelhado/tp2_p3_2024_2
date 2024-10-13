@@ -86,20 +86,20 @@ public class PantallaPrincipal extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
-		JMenu opcionMenu = new JMenu("Opciones");
-		menuBar.add(opcionMenu);
+		JMenu desplegableOpciones = new JMenu("Opciones");
+		menuBar.add(desplegableOpciones);
 
-		JMenuItem VolverMenu = new JMenuItem("Volver al Menú");
-		opcionMenu.add(VolverMenu);
-		VolverMenu.addActionListener(new ActionListener() {
+		JMenuItem volverAlMenu = new JMenuItem("Volver al Menú");
+		desplegableOpciones.add(volverAlMenu);
+		volverAlMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cambiarVentana(S_VENTANAMENU);
 			}
 		});
 
-		JMenuItem SalirJuego = new JMenuItem("Salir del Proyecto");
-		opcionMenu.add(SalirJuego);
-		SalirJuego.addActionListener(new ActionListener() {
+		JMenuItem salirJuego = new JMenuItem("Salir del Proyecto");
+		desplegableOpciones.add(salirJuego);
+		salirJuego.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Object[] options = { "Si", "No" };
 				int opcion = JOptionPane.showOptionDialog(ventanaJuego, "¿Estas seguro que deseas salir del proyecto?",

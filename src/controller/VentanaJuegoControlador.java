@@ -147,5 +147,8 @@ public class VentanaJuegoControlador {
 		return String.format("%.2f", grafo.getPesoArista(nodoA, nodoB));
 	}
 	
+	public VentanaJuego getVentanaJuego() {
+	    return ventana;
+	}
 		
 }

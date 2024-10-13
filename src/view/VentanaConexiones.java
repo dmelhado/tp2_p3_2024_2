@@ -27,8 +27,8 @@ public class VentanaConexiones {
 
 	private JFrame frame;
 	private VentanaMenu ventanaMenu;
-	private JComboBox<String> comboBox;
-	private JComboBox<String> comboBox_1;
+	private JComboBox<String> comboBoxEspia1;
+	private JComboBox<String> comboBoxEspia2;
 	private VentanaConexionesControlador controlador;
 
 	public VentanaConexiones(VentanaMenu ventanaMenu) {
@@ -44,105 +44,105 @@ public class VentanaConexiones {
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 
 		// PANELES //
-		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.WEST);
-		panel.setPreferredSize(new Dimension(50, 100));
+		JPanel panelIzquierdo = new JPanel();
+		frame.getContentPane().add(panelIzquierdo, BorderLayout.WEST);
+		panelIzquierdo.setPreferredSize(new Dimension(50, 100));
 
-		JPanel panel_1 = new JPanel();
-		frame.getContentPane().add(panel_1, BorderLayout.EAST);
-		panel_1.setPreferredSize(new Dimension(50, 100));
+		JPanel panelDerecho = new JPanel();
+		frame.getContentPane().add(panelDerecho, BorderLayout.EAST);
+		panelDerecho.setPreferredSize(new Dimension(50, 100));
 
-		JPanel panel_2 = new JPanel();
-		frame.getContentPane().add(panel_2, BorderLayout.SOUTH);
+		JPanel panelInferior = new JPanel();
+		frame.getContentPane().add(panelInferior, BorderLayout.SOUTH);
 
-		JPanel panel_3 = new JPanel();
-		frame.getContentPane().add(panel_3, BorderLayout.CENTER);
-		panel_3.setLayout(new GridLayout(6, 0, 0, 0));
+		JPanel panelCentral = new JPanel();
+		frame.getContentPane().add(panelCentral, BorderLayout.CENTER);
+		panelCentral.setLayout(new GridLayout(6, 0, 0, 0));
 
-		JLabel lblNewLabel_1 = new JLabel("");
-		panel_3.add(lblNewLabel_1);
+		JLabel labelVacio = new JLabel("");
+		panelCentral.add(labelVacio);
 
-		JPanel panel_4 = new JPanel();
-		panel_3.add(panel_4);
-		panel_4.setLayout(new GridLayout(2, 2, 0, 0));
+		JPanel panelComboBoxEspia = new JPanel();
+		panelCentral.add(panelComboBoxEspia);
+		panelComboBoxEspia.setLayout(new GridLayout(2, 2, 0, 0));
+		
+				JLabel labelSeleccionarEspia1 = new JLabel("Seleccione Espia 1");
+				labelSeleccionarEspia1.setHorizontalAlignment(SwingConstants.CENTER);
+				panelComboBoxEspia.add(labelSeleccionarEspia1);
+		
+				JLabel labelSeleccionarEspia2 = new JLabel("Seleccione Espia 2");
+				labelSeleccionarEspia2.setHorizontalAlignment(SwingConstants.CENTER);
+				panelComboBoxEspia.add(labelSeleccionarEspia2);
 
-		comboBox = new JComboBox<String>();
-		panel_4.add(comboBox);
+		comboBoxEspia1 = new JComboBox<String>();
+		panelComboBoxEspia.add(comboBoxEspia1);
 
-		comboBox_1 = new JComboBox<String>();
-		panel_4.add(comboBox_1);
+		comboBoxEspia2 = new JComboBox<String>();
+		panelComboBoxEspia.add(comboBoxEspia2);
 
-		JPanel panel_5 = new JPanel();
-		panel_3.add(panel_5);
-		panel_5.setLayout(new GridLayout(0, 1, 0, 0));
+		JPanel panelTexto = new JPanel();
+		panelCentral.add(panelTexto);
+		panelTexto.setLayout(new GridLayout(0, 1, 0, 0));
 
-		JSlider slider = new JSlider(0, 100, 50);
-		slider.setPaintTicks(true);
-		slider.setPaintLabels(true);
+		JSlider sliderProbabilidad = new JSlider(0, 100, 50);
+		sliderProbabilidad.setPaintTicks(true);
+		sliderProbabilidad.setPaintLabels(true);
 
-		panel_3.add(slider);
+		panelCentral.add(sliderProbabilidad);
 
-		JPanel panel_7 = new JPanel();
-		panel_3.add(panel_7);
-		panel_7.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		JPanel panelTextoSlider = new JPanel();
+		panelCentral.add(panelTextoSlider);
+		panelTextoSlider.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		JPanel panel_6 = new JPanel();
-		panel_3.add(panel_6);
-		panel_6.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		JPanel panelBoton = new JPanel();
+		panelCentral.add(panelBoton);
+		panelBoton.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		// LABELS //
-		JLabel lblNewLabel = new JLabel("Asigna las Conexiones");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
-		frame.getContentPane().add(lblNewLabel, BorderLayout.NORTH);
+		JLabel labelSuperiorTexto = new JLabel("Asigna las Conexiones");
+		labelSuperiorTexto.setHorizontalAlignment(SwingConstants.CENTER);
+		labelSuperiorTexto.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
+		frame.getContentPane().add(labelSuperiorTexto, BorderLayout.NORTH);
 
-		JLabel lblNewLabel_2 = new JLabel("Seleccione Agente 1");
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_4.add(lblNewLabel_2);
+		JLabel labelProbabilidad = new JLabel("Ingrese Probabilidad");
+		labelProbabilidad.setVerticalAlignment(SwingConstants.BOTTOM);
+		labelProbabilidad.setHorizontalAlignment(SwingConstants.CENTER);
+		panelTexto.add(labelProbabilidad);
 
-		JLabel lblNewLabel_3 = new JLabel("Seleccione Agente 2");
-		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_4.add(lblNewLabel_3);
-
-		JLabel lblNewLabel_4 = new JLabel("Ingrese Probabilidad");
-		lblNewLabel_4.setVerticalAlignment(SwingConstants.BOTTOM);
-		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_5.add(lblNewLabel_4);
-
-		JLabel lblNewLabel_5 = new JLabel(" " + slider.getValue() / 100.0);
-		panel_7.add(lblNewLabel_5);
-		slider.addChangeListener(new ChangeListener() {
+		JLabel labelSliderProbabilidad = new JLabel(" " + sliderProbabilidad.getValue() / 100.0);
+		panelTextoSlider.add(labelSliderProbabilidad);
+		sliderProbabilidad.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				double decimalValue = slider.getValue() / 100.0;
-				lblNewLabel_5.setText(" " + decimalValue);
+				double decimalValue = sliderProbabilidad.getValue() / 100.0;
+				labelSliderProbabilidad.setText(" " + decimalValue);
 			}
 		});
 
 		Hashtable<Integer, JLabel> labelTable = new Hashtable<>();
 		labelTable.put(0, new JLabel("0"));
 		labelTable.put(100, new JLabel("1"));
-		slider.setLabelTable(labelTable);
+		sliderProbabilidad.setLabelTable(labelTable);
 
 		// BOTONES //
-		JButton btnNewButton = new JButton("Volver al Menu");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton botonVolverAlMenu = new JButton("Volver al Menu");
+		botonVolverAlMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
 			}
 		});
-		panel_2.add(btnNewButton);
+		panelInferior.add(botonVolverAlMenu);
 
-		JButton btnNewButton_1 = new JButton("Agregar Arista");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton botonAgregarArista = new JButton("Agregar Arista");
+		botonAgregarArista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String espia1 = (String) comboBox.getSelectedItem();
-				String espia2 = (String) comboBox_1.getSelectedItem();
-				String probabilidadTexto = lblNewLabel_5.getText();
+				String espia1 = (String) comboBoxEspia1.getSelectedItem();
+				String espia2 = (String) comboBoxEspia2.getSelectedItem();
+				String probabilidadTexto = labelSliderProbabilidad.getText();
 				controlador.agregarArista(espia1, espia2, probabilidadTexto);
 			}
 		});
-		panel_6.add(btnNewButton_1);
+		panelBoton.add(botonAgregarArista);
 	}
 
 	public void abrirVentana() {
@@ -155,13 +155,13 @@ public class VentanaConexiones {
 		DefaultComboBoxModel<String> espia1 = new DefaultComboBoxModel<>(listaEspias.toArray(new String[0]));
 		DefaultComboBoxModel<String> espia2 = new DefaultComboBoxModel<>(listaEspias.toArray(new String[0]));
 
-		comboBox.setModel(espia1);
-		comboBox_1.setModel(espia2);
+		comboBoxEspia1.setModel(espia1);
+		comboBoxEspia2.setModel(espia2);
 	}
 
 	public void limpiarComboBox() {
-		comboBox.removeAllItems();
-		comboBox_1.removeAllItems();
+		comboBoxEspia1.removeAllItems();
+		comboBoxEspia2.removeAllItems();
 	}
 
 	public void setControlador(VentanaConexionesControlador controlador) {

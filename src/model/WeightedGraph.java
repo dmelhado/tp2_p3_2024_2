@@ -2,11 +2,11 @@ package model;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Set;
 
-import controller.Observador;
-
-public class WeightedGraph<T> extends Observador {
+public class WeightedGraph<T> {
 
 	private HashMap<Integer, T> nodos;
 	private HashMap<Integer, Edge> aristas;
@@ -24,12 +24,15 @@ public class WeightedGraph<T> extends Observador {
 		int idNodo = this.generadorIdNodo;
 		this.nodos.put(idNodo, data);
 		this.generadorIdNodo++;
-		notificarObservador();
 		return idNodo;
 	}
 
+	public boolean contains(T data) {
+		return nodos.containsValue(data);
+	}
+
 	public T getData(int id) {
-		if(!this.contieneNodo(id)) {
+		if (!this.contieneNodo(id)) {
 			throw new RuntimeException("No se encuentra ese elemento.");
 		}
 		return this.nodos.get(id);
@@ -53,21 +56,20 @@ public class WeightedGraph<T> extends Observador {
 				this.aristas.remove(i);
 			}
 		}
-		notificarObservador();
+
 		this.aristas.remove(nodeID);
 		return true;
 	}
 
 	public int setConexiones(int nodeA, int nodeB, double weight) {
-		//TODO: Chequear esto, ya que con el if tira error al generar el AGS
-	//	if (!this.contieneNodo(nodeA) || !this.contieneNodo(nodeB)) {
-	//		throw new RuntimeException("Uno de los nodos no existe");
-	//	}
+		// TODO: Chequear esto, ya que con el if tira error al generar el AGS
+		//if (!this.contieneNodo(nodeA) || !this.contieneNodo(nodeB)) {
+		//	throw new RuntimeException("Uno de los nodos no existe");
+		//}
 
 		int idArista = this.generadorIdArista;
 		this.aristas.put(idArista, new Edge(nodeA, nodeB, weight));
 		this.generadorIdArista++;
-		notificarObservador();
 		return idArista;
 	}
 
@@ -108,7 +110,6 @@ public class WeightedGraph<T> extends Observador {
 		if (edgeID < 0) {
 			return false;
 		}
-		notificarObservador();
 		this.aristas.remove(edgeID);
 		return true;
 	}
@@ -129,49 +130,69 @@ public class WeightedGraph<T> extends Observador {
 		return this.nodos.isEmpty();
 	}
 
-	public boolean esConexo() {
+	// devuelve la lista de los nodos alcanzados en el orden del recorrido
+	public LinkedList<Integer> bfs() {
+
+		LinkedList<Integer> visitados = new LinkedList<Integer>();
 
 		// caso trivial
-		if (this.nodos.size() <= 1) {
-			return true;
+		if (this.nodos.size() < 1) {
+			return visitados;
 		}
 
 		// obtenemos primer nodo. cualquiera sirve.
 		int primerNodo = nodos.keySet().iterator().next();
 
-		// armamos lista de nodos recorridos
-		HashSet<Integer> visitados = new HashSet<Integer>();
-		visitados.add(primerNodo);
+		Queue<Integer> colaNodos = new LinkedList<Integer>();
+		colaNodos.add(primerNodo);
 
-		// recursion time!!
-		this.explorarVecinos(primerNodo, visitados);
+		while (!colaNodos.isEmpty()) {
 
-		return (visitados.size() == this.nodos.size());
+			int nodoActual = colaNodos.remove();
 
-	}
+			if (!visitados.contains(nodoActual)) {
+				visitados.add(nodoActual);
 
-	private void explorarVecinos(int nodo, HashSet<Integer> visitados) {
+				HashSet<Integer> vecinos = this.getNeighbors(nodoActual);
 
-		HashSet<Integer> vecinosNodo = this.getNeighbors(nodo);
-
-		for (Integer v : vecinosNodo) {
-			if (!visitados.contains(v)) {
-				visitados.add(v);
-				this.explorarVecinos(v, visitados);
+				for (Integer v : vecinos) {
+					if (!colaNodos.contains(v)) {
+						colaNodos.add(v);
+					}
+				}
 			}
 		}
+
+		return visitados;
+	}
+
+	public boolean esConexo() {
+		return (this.bfs().size() == this.nodos.size());
+	}
+
+	public double obtenerMaximoPeso() {
+		if (this.aristas.isEmpty()) {
+			throw new RuntimeException("El grafo no contiene aristas");
+		}
+		double res = Double.NEGATIVE_INFINITY;
+		for (Edge e : this.aristas.values()) {
+			if (res < e.getPeso()) {
+				res = e.getPeso();
+			}
+		}
+		return res;
 	}
 
 	public HashSet<Integer> getNeighbors(int nodo) {
 
-		if(!this.contieneNodo(nodo)) {
+		if (!this.contieneNodo(nodo)) {
 			throw new RuntimeException("No se encuentra ese elemento.");
 		}
-		
+
 		HashSet<Integer> res = new HashSet<Integer>();
 
 		for (Edge e : this.aristas.values()) {
-			
+
 			if (e.connects(nodo)) {
 				res.add(e.getOtroExtremo(nodo));
 			}

@@ -42,27 +42,27 @@ public class VentanaJuego extends JPanel implements Observer {
 		setBounds(100, 100, 640, 480);
 		setLayout(new BorderLayout());
 
-		JPanel panel = new JPanel();
-		add(panel, BorderLayout.SOUTH);
-		panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		JPanel panelInferior = new JPanel();
+		add(panelInferior, BorderLayout.SOUTH);
+		panelInferior.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
-		JLabel lblNewLabel = new JLabel("                       ");
-		panel.add(lblNewLabel);
+		JLabel labelVacio = new JLabel("                       ");
+		panelInferior.add(labelVacio);
 
-		JButton btnNewButton = new JButton("Generar Arbol Minimo");
-		panel.add(btnNewButton);
-		btnNewButton.setPreferredSize(new Dimension(170, 40));
+		JButton botonGenerarArbolMinimo = new JButton("Generar Arbol Minimo");
+		panelInferior.add(botonGenerarArbolMinimo);
+		botonGenerarArbolMinimo.setPreferredSize(new Dimension(170, 40));
 
 		JPanel panelDerecho = new JPanel();
 		add(panelDerecho, BorderLayout.EAST);
 		panelDerecho.setPreferredSize(new Dimension(200, 200));
 		panelDerecho.setLayout(new BorderLayout(0, 0));
 
-		JPanel panel_1 = new JPanel();
-		panelDerecho.add(panel_1, BorderLayout.SOUTH);
+		JPanel panelTexto = new JPanel();
+		panelDerecho.add(panelTexto, BorderLayout.SOUTH);
 
-		JLabel lblNewLabel_1 = new JLabel("Riesgo Minimo: ");
-		panel_1.add(lblNewLabel_1);
+		JLabel labelRiesgoMinimo = new JLabel("Riesgo Minimo: ");
+		panelTexto.add(labelRiesgoMinimo);
 
 		JPanel panelSuperior = new JPanel();
 		add(panelSuperior, BorderLayout.NORTH);
@@ -71,9 +71,9 @@ public class VentanaJuego extends JPanel implements Observer {
 		modeloTabla = new DefaultTableModel(new Object[] { "Arista", "Probabilidad" }, 0);
 
 		tabla = new JTable(modeloTabla);
-		JScrollPane scrollPane = new JScrollPane(tabla);
-		panelDerecho.add(scrollPane, BorderLayout.CENTER);
-		scrollPane.setPreferredSize(new Dimension(250, 150));
+		JScrollPane scrollPaneAristasArbolMinimo = new JScrollPane(tabla);
+		panelDerecho.add(scrollPaneAristasArbolMinimo, BorderLayout.CENTER);
+		scrollPaneAristasArbolMinimo.setPreferredSize(new Dimension(250, 150));
 
 		panelCentral = new JPanel() {
 			private static final long serialVersionUID = 1L;
@@ -85,12 +85,12 @@ public class VentanaJuego extends JPanel implements Observer {
 			}
 		};
 		add(panelCentral, BorderLayout.CENTER);
-		btnNewButton.addActionListener(new ActionListener() {
+		botonGenerarArbolMinimo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controlador.calcularMST();
 				double riesgoMinimo = controlador.calcularRiesgoMinimo();
-				lblNewLabel_1.setText("Riesgo Minimo: " + String.format("%.2f", riesgoMinimo));
+				labelRiesgoMinimo.setText("Riesgo Minimo: " + String.format("%.2f", riesgoMinimo));
 				panelCentral.revalidate();
 				panelCentral.repaint();
 			}
@@ -163,6 +163,12 @@ public class VentanaJuego extends JPanel implements Observer {
 		{
 			modeloTabla.addRow(fila);
 		}
+	}
+	
+	public void limpiarTabla()
+	{
+		modeloTabla.setRowCount(0);
+		
 	}
 
 	@Override

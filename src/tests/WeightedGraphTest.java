@@ -1,6 +1,9 @@
 package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.LinkedList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -91,5 +94,21 @@ public class WeightedGraphTest {
 		graph.setConexiones(id4, id5, 1);
 		
 		assertFalse(graph.esConexo());
+	}
+	
+	@Test
+	public void testBFS() {
+		int id1 = graph.put("Node 1");
+		int id2 = graph.put("Node 2");
+		int id3 = graph.put("Node 3");
+		int id4 = graph.put("Node 4");
+		int id5 = graph.put("Node 5");
+		
+		graph.setConexiones(id1, id2, 1);
+		graph.setConexiones(id1, id3, 1);
+		graph.setConexiones(id1, id4, 1);
+		graph.setConexiones(id2, id5, 1);
+		
+		LinkedList<Integer> bfsResult = graph.bfs();
 	}
 }

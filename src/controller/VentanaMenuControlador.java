@@ -2,9 +2,10 @@ package controller;
 
 import java.util.HashMap;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import view.PantallaPrincipal;
-import view.VentanaAgentes;
+import view.VentanaEspias;
 import view.VentanaConexiones;
 import view.VentanaMenu;
 
@@ -25,7 +26,7 @@ public class VentanaMenuControlador {
 	
 	public void abrirVentanaAgentes()
 	{
-		VentanaAgentes ventanaAgentes = new VentanaAgentes(ventanaMenu);
+		VentanaEspias ventanaAgentes = new VentanaEspias(ventanaMenu);
 		ventanaAgentes.abrirVentana();
 	}
 	
@@ -48,6 +49,7 @@ public class VentanaMenuControlador {
 		if (ventanaConexiones != null) {
 			ventanaConexiones.limpiarComboBox();
 		}
+		pantallaPrincipal.getControladorJuego().getVentanaJuego().limpiarTabla();
 		
 	}
 	
@@ -85,4 +87,32 @@ public class VentanaMenuControlador {
 		}
 		
 	}
+	
+	public void verificarEspia(String nombreEspia)
+	{
+		boolean existeEspia = ventanaMenu.getListaEspias().stream().anyMatch(espia -> espia.equalsIgnoreCase(nombreEspia));
+		if (existeEspia) {
+	        JOptionPane.showMessageDialog(
+	            ventanaMenu, 
+	            "El espía '" + nombreEspia + "' ya existe, ingrese otro.", 
+	            "Error", 
+	            JOptionPane.WARNING_MESSAGE
+	        );
+	    } else {
+	        ventanaMenu.agregarTablaEspias(nombreEspia);
+	    }
+	
+	}
+	
+	 public boolean existeConexion(String espia1, String espia2) {
+	        DefaultTableModel modeloTabla = ventanaMenu.getModeloTabla();
+	        int numRows = modeloTabla.getRowCount();
+	        for (int i = 0; i < numRows; i++) {
+	            String conexion = (String) modeloTabla.getValueAt(i, 0);
+	            if (conexion.contains(espia1) && conexion.contains(espia2)) {
+	                return true;
+	            }
+	        }
+	        return false;
+	    }
 }
