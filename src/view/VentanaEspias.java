@@ -69,8 +69,6 @@ public class VentanaEspias {
 				controlador.agregarEspia(espia);
 				fieldNombreAgente.setText("");
 
-			
-
 			}
 		});
 
@@ -121,7 +119,7 @@ public class VentanaEspias {
 
 	public void abrirVentana() {
 		frameAgentes.setVisible(true);
-		
+
 	}
 
 	public void cerrarVentana() {

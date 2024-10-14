@@ -6,22 +6,18 @@ import view.VentanaMenu;
 public class VentanaEspiasControlador {
 	private VentanaEspias ventanaAgentes;
 	private VentanaMenu ventanaMenu;
-	
-	public VentanaEspiasControlador(VentanaEspias ventanaAgentes, VentanaMenu ventanaMenu)
-	{
+
+	public VentanaEspiasControlador(VentanaEspias ventanaAgentes, VentanaMenu ventanaMenu) {
 		this.ventanaAgentes = ventanaAgentes;
-		this.ventanaMenu = ventanaMenu;		
-		
+		this.ventanaMenu = ventanaMenu;
+
 		this.ventanaAgentes.setControlador(this);
 	}
-	
-	public void agregarEspia(String espia)
-	{
+
+	public void agregarEspia(String espia) {
 		if (!espia.isEmpty()) {
 			ventanaMenu.getControlador().verificarEspia(espia);
 		}
 	}
-	
-	
 
 }

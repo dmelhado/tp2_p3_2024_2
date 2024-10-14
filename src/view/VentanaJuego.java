@@ -25,7 +25,7 @@ import javax.swing.JLabel;
 public class VentanaJuego extends JPanel implements ObservadorInterfaz {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private JTable tabla;
 	private DefaultTableModel modeloTabla;
 	private JPanel panelCentral;
@@ -97,13 +97,11 @@ public class VentanaJuego extends JPanel implements ObservadorInterfaz {
 
 	}
 
-
 	public void dibujarGrafo(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D dibujo = (Graphics2D) g;
 		dibujo.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-		
 		dibujo.setStroke(new BasicStroke(2.0f));
 
 		int ancho = panelCentral.getWidth();
@@ -113,16 +111,15 @@ public class VentanaJuego extends JPanel implements ObservadorInterfaz {
 		dibujarAristas(dibujo, coordenadas);
 		dibujarMST(dibujo, coordenadas);
 	}
-	
-	public void dibujarNodos(Graphics dibujo, HashMap<Integer, int[]> coordenadas)
-	{
+
+	public void dibujarNodos(Graphics dibujo, HashMap<Integer, int[]> coordenadas) {
 		for (int i = 0; i < coordenadas.size(); i++) {
 			int[] coords = coordenadas.get(i);
 			dibujo.fillOval(coords[0], coords[1], 20, 20); // Tamaño nodo
-			dibujo.drawString(controlador.getNombreNodo(i), coords[0], coords[1] - 10); // Etiqueta del nodo
+			dibujo.drawString(controlador.getNombreEspia(i), coords[0], coords[1] - 10); // Etiqueta del nodo
 		}
 	}
-	
+
 	public void dibujarAristas(Graphics dibujo, HashMap<Integer, int[]> coordenadas) {
 		List<int[]> aristasDatos = controlador.obtenerDatosAristas();
 		for (int[] arista : aristasDatos) {
@@ -132,59 +129,52 @@ public class VentanaJuego extends JPanel implements ObservadorInterfaz {
 			int[] coordsA = coordenadas.get(nodoA);
 			int[] coordsB = coordenadas.get(nodoB);
 			dibujo.drawLine(coordsA[0] + 10, coordsA[1] + 10, coordsB[0] + 10, coordsB[1] + 10);
-			dibujo.drawString(controlador.getPesoArista(nodoA, nodoB), (coordsA[0] + coordsB[0]) / 2,
+			dibujo.drawString(controlador.getProbabilidad(nodoA, nodoB), (coordsA[0] + coordsB[0]) / 2,
 					(coordsA[1] + coordsB[1]) / 2);
 		}
 
 	}
-	
-	public void dibujarMST(Graphics dibujo, HashMap<Integer, int[]> coordenadas)
-	{			
-					if (coordenadas.isEmpty()) return;
-					dibujo.setColor(Color.RED);
-					((Graphics2D) dibujo).setStroke(new BasicStroke(5.0f));
-					List<int[]> mstDatos = controlador.obtenerDatosMST();
-					for(int[] arista : mstDatos) 
-					{
-						int nodoA = arista[0];
-						int nodoB = arista[1];
-						int[] coordsA = coordenadas.get(nodoA);
-				        int[] coordsB = coordenadas.get(nodoB);
-						if (coordsA != null && coordsB != null) {
-						dibujo.drawLine(coordenadas.get(nodoA)[0] + 10, coordenadas.get(nodoA)[1] + 10,
-								coordenadas.get(nodoB)[0] + 10, coordenadas.get(nodoB)[1] + 10);
-						}
-					}
-				
+
+	public void dibujarMST(Graphics dibujo, HashMap<Integer, int[]> coordenadas) {
+		if (coordenadas.isEmpty())
+			return;
+		dibujo.setColor(Color.RED);
+		((Graphics2D) dibujo).setStroke(new BasicStroke(5.0f));
+		List<int[]> mstDatos = controlador.obtenerDatosMST();
+		for (int[] arista : mstDatos) {
+			int nodoA = arista[0];
+			int nodoB = arista[1];
+			int[] coordsA = coordenadas.get(nodoA);
+			int[] coordsB = coordenadas.get(nodoB);
+			if (coordsA != null && coordsB != null) {
+				dibujo.drawLine(coordenadas.get(nodoA)[0] + 10, coordenadas.get(nodoA)[1] + 10,
+						coordenadas.get(nodoB)[0] + 10, coordenadas.get(nodoB)[1] + 10);
+			}
+		}
+
 	}
-	
 
 	public void actualizarTablaMST(Object[][] datos) {
 		modeloTabla.setRowCount(0);
-		for(Object[] fila : datos)
-		{
+		for (Object[] fila : datos) {
 			modeloTabla.addRow(fila);
 		}
 	}
-	
-	public void limpiarTabla()
-	{
+
+	public void limpiarTabla() {
 		modeloTabla.setRowCount(0);
 		labelCuelloDeBotella.setText("Cuello de Botella: ");
-		
-		
+
 	}
 
 	@Override
 	public void actualizar() {
 		repaint();
-		
 
 	}
 
 	public void setControlador(VentanaJuegoControlador controlador) {
 		this.controlador = controlador;
 	}
-
 
 }

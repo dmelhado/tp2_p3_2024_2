@@ -44,10 +44,6 @@ public class GrafoPonderado<T> extends Observador {
 	public Set<Integer> getAllKeys() {
 		return this.nodos.keySet();
 	}
-	/*
-	 * public Set<Integer> getNeighboursEdges(int id) { Set<Integer> res; for(Inte)
-	 * return this.nodes.get(id).getNeighbourSet(); }
-	 */
 
 	public boolean eliminarNodo(int nodeID) {
 		if (!this.contieneNodo(nodeID)) {
@@ -65,7 +61,7 @@ public class GrafoPonderado<T> extends Observador {
 		return true;
 	}
 
-	public int setConexiones(int nodeA, int nodeB, double weight) {
+	public int setConexion(int nodeA, int nodeB, double weight) {
 		// TODO: Chequear esto, ya que con el if tira error al generar el AGS
 		//if (!this.contieneNodo(nodeA) || !this.contieneNodo(nodeB)) {
 		//	throw new RuntimeException("Uno de los nodos no existe");
@@ -98,20 +94,15 @@ public class GrafoPonderado<T> extends Observador {
 	}
 
 	public double getPesoArista(int nodeA, int nodeB) {
-
 		int edgeID = this.buscarArista(nodeA, nodeB);
-
 		if (edgeID < 0) {
 			throw new RuntimeException("No hay conexion entre los nodos");
 		}
-
 		return this.aristas.get(edgeID).getPeso();
 	}
 
 	public boolean eliminarConexion(int nodeA, int nodeB) {
-
 		int edgeID = this.buscarArista(nodeA, nodeB);
-
 		if (edgeID < 0) {
 			return false;
 		}
@@ -176,10 +167,7 @@ public class GrafoPonderado<T> extends Observador {
 	}
 
 	public double obtenerMaximoPeso() {
-		if (this.aristas.isEmpty()) {
-			throw new RuntimeException("El grafo no contiene aristas");
-		}
-		double res = Double.NEGATIVE_INFINITY;
+		double res = 0;
 		for (Arista e : this.aristas.values()) {
 			if (res < e.getPeso()) {
 				res = e.getPeso();

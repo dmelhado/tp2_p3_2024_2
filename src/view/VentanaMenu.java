@@ -162,7 +162,7 @@ public class VentanaMenu extends JPanel {
 		listaEspias.clear();
 
 	}
-	
+
 	public void mostrarMensajeNoConexiones() {
 		JOptionPane.showMessageDialog(this,
 				"No hay conexiones de aristas. Por favor, agregue conexiones antes de crear el grafo.", "Error",
@@ -170,16 +170,11 @@ public class VentanaMenu extends JPanel {
 		return;
 
 	}
-	
-	public void mostrarMensajeVerificacionEspia(String nombreEspia)
-	{
-		 JOptionPane.showMessageDialog(
-		            this, 
-		            "El espía '" + nombreEspia + "' ya existe, ingrese otro.", 
-		            "Error", 
-		            JOptionPane.WARNING_MESSAGE
-		        );
-		 return;
+
+	public void mostrarMensajeVerificacionEspia(String nombreEspia) {
+		JOptionPane.showMessageDialog(this, "El espía '" + nombreEspia + "' ya existe, ingrese otro.", "Error",
+				JOptionPane.WARNING_MESSAGE);
+		return;
 	}
 
 	public void setControlador(VentanaMenuControlador controlador) {
@@ -198,5 +193,4 @@ public class VentanaMenu extends JPanel {
 		return controlador;
 	}
 
-	
 }

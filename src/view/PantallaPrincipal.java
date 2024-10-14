@@ -31,22 +31,22 @@ public class PantallaPrincipal extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	
+
 	public static void main(String[] args) {
-		 try {
-	            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-	                if ("Nimbus".equals(info.getName())) {
-	                    UIManager.setLookAndFeel(info.getClassName());
-	                    break;
-	                }
-	            }
-	        } catch (Exception e) {
-	            try {
-	                UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-	            } catch (Exception e2) {
-	                e2.printStackTrace();
-	            }
-	        }
+		try {
+			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (Exception e) {
+			try {
+				UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -58,6 +58,7 @@ public class PantallaPrincipal extends JFrame {
 			}
 		});
 	}
+
 	/**
 	 * Create the application.
 	 */

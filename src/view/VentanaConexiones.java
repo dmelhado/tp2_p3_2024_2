@@ -67,14 +67,14 @@ public class VentanaConexiones {
 		JPanel panelComboBoxEspia = new JPanel();
 		panelCentral.add(panelComboBoxEspia);
 		panelComboBoxEspia.setLayout(new GridLayout(2, 2, 0, 0));
-		
-				JLabel labelSeleccionarEspia1 = new JLabel("Seleccione Espia 1");
-				labelSeleccionarEspia1.setHorizontalAlignment(SwingConstants.CENTER);
-				panelComboBoxEspia.add(labelSeleccionarEspia1);
-		
-				JLabel labelSeleccionarEspia2 = new JLabel("Seleccione Espia 2");
-				labelSeleccionarEspia2.setHorizontalAlignment(SwingConstants.CENTER);
-				panelComboBoxEspia.add(labelSeleccionarEspia2);
+
+		JLabel labelSeleccionarEspia1 = new JLabel("Seleccione Espia 1");
+		labelSeleccionarEspia1.setHorizontalAlignment(SwingConstants.CENTER);
+		panelComboBoxEspia.add(labelSeleccionarEspia1);
+
+		JLabel labelSeleccionarEspia2 = new JLabel("Seleccione Espia 2");
+		labelSeleccionarEspia2.setHorizontalAlignment(SwingConstants.CENTER);
+		panelComboBoxEspia.add(labelSeleccionarEspia2);
 
 		comboBoxEspia1 = new JComboBox<String>();
 		panelComboBoxEspia.add(comboBoxEspia1);
@@ -166,25 +166,21 @@ public class VentanaConexiones {
 		comboBoxEspia1.removeAllItems();
 		comboBoxEspia2.removeAllItems();
 	}
-	
-	public void mostrarMensajeBucleONoSeleccionado(String espia1, String espia2, String probabilidadTexto)
-	{
+
+	public void mostrarMensajeBucleONoSeleccionado(String espia1, String espia2, String probabilidadTexto) {
 		JOptionPane.showMessageDialog(ventanaMenu, "No se admiten Bucles o no se seleccionaron Espias",
 				"Error de Conexión", JOptionPane.WARNING_MESSAGE);
 		return;
 	}
-	
-	public void mostrarMensajeYaExisteConexion(String espia1, String espia2, String probabiliadTexto)
-	{
-		JOptionPane.showMessageDialog(ventanaMenu,
-				"La conexión entre '" + espia1 + "' y '" + espia2 + "' ya existe.", "Error de Conexión",
-				JOptionPane.WARNING_MESSAGE);
+
+	public void mostrarMensajeYaExisteConexion(String espia1, String espia2, String probabiliadTexto) {
+		JOptionPane.showMessageDialog(ventanaMenu, "La conexión entre '" + espia1 + "' y '" + espia2 + "' ya existe.",
+				"Error de Conexión", JOptionPane.WARNING_MESSAGE);
 		return;
 	}
-	
 
 	public void setControlador(VentanaConexionesControlador controlador) {
 		this.controlador = controlador;
-		
+
 	}
 }

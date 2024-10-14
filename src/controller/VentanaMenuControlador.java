@@ -12,37 +12,30 @@ public class VentanaMenuControlador {
 	private VentanaMenu ventanaMenu;
 	private PantallaPrincipal pantallaPrincipal;
 	private VentanaConexiones ventanaConexiones;
-	
-	
-	public VentanaMenuControlador(VentanaMenu ventanaMenu, PantallaPrincipal pantallaPrincipal)
-	{
+
+	public VentanaMenuControlador(VentanaMenu ventanaMenu, PantallaPrincipal pantallaPrincipal) {
 		this.ventanaMenu = ventanaMenu;
 		this.pantallaPrincipal = pantallaPrincipal;
-		
+
 		ventanaMenu.setControlador(this);
-		
+
 	}
-	
-	public void abrirVentanaAgentes()
-	{
+
+	public void abrirVentanaAgentes() {
 		VentanaEspias ventanaAgentes = new VentanaEspias(ventanaMenu);
 		ventanaAgentes.abrirVentana();
 	}
-	
-	public void abrirVentanaConexiones()
-	{
-		if(ventanaConexiones == null)
-		{
+
+	public void abrirVentanaConexiones() {
+		if (ventanaConexiones == null) {
 			ventanaConexiones = new VentanaConexiones(ventanaMenu);
-			VentanaConexionesControlador controlador = new VentanaConexionesControlador(ventanaConexiones,
-					ventanaMenu);
+			VentanaConexionesControlador controlador = new VentanaConexionesControlador(ventanaConexiones, ventanaMenu);
 			ventanaConexiones.setControlador(controlador);
 		}
 		ventanaConexiones.abrirVentana();
 	}
-	
-	public void limpiarTablas()
-	{
+
+	public void limpiarTablas() {
 		System.out.println("Limpiando Tablas..");
 		ventanaMenu.limpiarTablas();
 		if (ventanaConexiones != null) {
@@ -50,16 +43,15 @@ public class VentanaMenuControlador {
 		}
 		pantallaPrincipal.getControladorJuego().getVentanaJuego().limpiarTabla();
 		pantallaPrincipal.getControladorJuego().limpiarTodo();
-		
+
 	}
-	
-	public void crearGrafo()
-	{
+
+	public void crearGrafo() {
 		DefaultTableModel modeloTabla = ventanaMenu.getModeloTabla();
 		int numeroFila = modeloTabla.getRowCount();
 		if (numeroFila == 0) {
 			ventanaMenu.mostrarMensajeNoConexiones();
-		        return;
+			return;
 		}
 		HashMap<String, Boolean> mapaEspias = new HashMap<>();
 		for (int i = 0; i < numeroFila; i++) {
@@ -89,29 +81,29 @@ public class VentanaMenuControlador {
 		if (ventanaConexiones != null) {
 			ventanaConexiones.actualizarComboBoxes();
 		}
-		
+
 	}
-	
-	public void verificarEspia(String nombreEspia)
-	{
-		boolean existeEspia = ventanaMenu.getListaEspias().stream().anyMatch(espia -> espia.equalsIgnoreCase(nombreEspia));
+
+	public void verificarEspia(String nombreEspia) {
+		boolean existeEspia = ventanaMenu.getListaEspias().stream()
+				.anyMatch(espia -> espia.equalsIgnoreCase(nombreEspia));
 		if (existeEspia) {
-	        ventanaMenu.mostrarMensajeVerificacionEspia(nombreEspia);
-	    } else {
-	        ventanaMenu.agregarTablaEspias(nombreEspia);
-	    }
-	
+			ventanaMenu.mostrarMensajeVerificacionEspia(nombreEspia);
+		} else {
+			ventanaMenu.agregarTablaEspias(nombreEspia);
+		}
+
 	}
-	
-	 public boolean existeConexion(String espia1, String espia2) {
-	        DefaultTableModel modeloTabla = ventanaMenu.getModeloTabla();
-	        int numRows = modeloTabla.getRowCount();
-	        for (int i = 0; i < numRows; i++) {
-	            String conexion = (String) modeloTabla.getValueAt(i, 0);
-	            if (conexion.contains(espia1) && conexion.contains(espia2)) {
-	                return true;
-	            }
-	        }
-	        return false;
-	    }
+
+	public boolean existeConexion(String espia1, String espia2) {
+		DefaultTableModel modeloTabla = ventanaMenu.getModeloTabla();
+		int numRows = modeloTabla.getRowCount();
+		for (int i = 0; i < numRows; i++) {
+			String conexion = (String) modeloTabla.getValueAt(i, 0);
+			if (conexion.contains(espia1) && conexion.contains(espia2)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

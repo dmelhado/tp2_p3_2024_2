@@ -1,6 +1,5 @@
 package controller;
 
-
 import view.VentanaConexiones;
 import view.VentanaMenu;
 
@@ -29,5 +28,3 @@ public class VentanaConexionesControlador {
 	}
 
 }
-
-
