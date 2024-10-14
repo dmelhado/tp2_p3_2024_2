@@ -6,7 +6,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
 
-public class WeightedGraph<T> {
+import controller.Observador;
+
+public class WeightedGraph<T> extends Observador {
 
 	private HashMap<Integer, T> nodos;
 	private HashMap<Integer, Edge> aristas;
@@ -24,6 +26,7 @@ public class WeightedGraph<T> {
 		int idNodo = this.generadorIdNodo;
 		this.nodos.put(idNodo, data);
 		this.generadorIdNodo++;
+		notificarObservador();
 		return idNodo;
 	}
 
@@ -58,6 +61,7 @@ public class WeightedGraph<T> {
 		}
 
 		this.aristas.remove(nodeID);
+		notificarObservador();
 		return true;
 	}
 
@@ -70,6 +74,7 @@ public class WeightedGraph<T> {
 		int idArista = this.generadorIdArista;
 		this.aristas.put(idArista, new Edge(nodeA, nodeB, weight));
 		this.generadorIdArista++;
+		notificarObservador();
 		return idArista;
 	}
 

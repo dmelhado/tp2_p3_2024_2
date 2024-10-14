@@ -114,7 +114,7 @@ public class VentanaMenu extends JPanel {
 		JLabel labelVacio = new JLabel("                              ");
 		panelInferior.add(labelVacio);
 
-		JButton botonCrearGrafo = new JButton("Crear Grafo");
+		JButton botonCrearGrafo = new JButton("Dibujar Grafo");
 		botonCrearGrafo.setPreferredSize(new Dimension(150, 50));
 		panelInferior.add(botonCrearGrafo);
 
