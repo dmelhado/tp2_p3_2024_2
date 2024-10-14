@@ -12,17 +12,19 @@ import view.VentanaJuego;
 public class VentanaJuegoControlador {
 	private WeightedGraph<String> grafo;
 	private WeightedGraph<String> mst;
+	private HashMap<Integer, int[]> coordenadas = new HashMap<>();
 	private VentanaJuego ventana;
 	
 	public VentanaJuegoControlador(WeightedGraph<String> grafo, VentanaJuego ventana)
 	{
 		this.grafo = new WeightedGraph<String>();
+		this.mst = new WeightedGraph<String>();
 		this.ventana = ventana;
 		this.ventana.setControlador(this);
 	}
 	
 	public void crearGrafo(String[] espias, String[][] conexiones) {
-		this.grafo = new WeightedGraph<>();
+		this.grafo = new WeightedGraph<>();		
 		HashMap<String, Integer> nodos = new HashMap<>();
 		for (String espia : espias) {
 			int idNodo = grafo.put(espia);
@@ -43,7 +45,6 @@ public class VentanaJuegoControlador {
 	}
 	
 	 public HashMap<Integer, int[]> calcularCoordenadas(int ancho, int altura) {
-	        HashMap<Integer, int[]> coordenadas = new HashMap<>();
 	        int tamañoNodos = grafo.tamaño();
 	        if (tamañoNodos == 0)
 	        {
@@ -124,17 +125,13 @@ public class VentanaJuegoControlador {
         grafo.setConexiones(nodoA, nodoB, probabilidad);
     }
 	
-	public double calcularRiesgoMinimo()
+	public double calcularCuelloDeBotella()
 	{
 		if (mst == null)
 			return 0.0;
-		double riesgoMinimo = 0.0;
-		for (Integer idArista : mst.getTodasLasAristas().keySet())
-		{
-			Edge arista = mst.getTodasLasAristas().get(idArista);
-			riesgoMinimo += arista.getPeso();
-		}
-		return riesgoMinimo;
+		double cuelloDeBotella = 0.0;
+		cuelloDeBotella = grafo.obtenerMaximoPeso();
+		return cuelloDeBotella;
 	}
 
 	public String getNombreNodo(int i) {
@@ -149,6 +146,12 @@ public class VentanaJuegoControlador {
 	
 	public VentanaJuego getVentanaJuego() {
 	    return ventana;
+	}
+
+	public void limpiarTodo() {
+		grafo = new WeightedGraph<String>();
+		mst = new WeightedGraph<String>();
+		
 	}
 		
 }

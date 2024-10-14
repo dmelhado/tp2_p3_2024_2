@@ -30,6 +30,7 @@ public class VentanaJuego extends JPanel implements Observer {
 	private DefaultTableModel modeloTabla;
 	private JPanel panelCentral;
 	private VentanaJuegoControlador controlador;
+	private JLabel labelCuelloDeBotella;
 
 	public VentanaJuego(VentanaJuegoControlador controlador) {
 		this.controlador = controlador;
@@ -44,10 +45,7 @@ public class VentanaJuego extends JPanel implements Observer {
 
 		JPanel panelInferior = new JPanel();
 		add(panelInferior, BorderLayout.SOUTH);
-		panelInferior.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-
-		JLabel labelVacio = new JLabel("                       ");
-		panelInferior.add(labelVacio);
+		panelInferior.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		JButton botonGenerarArbolMinimo = new JButton("Generar Arbol Minimo");
 		panelInferior.add(botonGenerarArbolMinimo);
@@ -61,8 +59,8 @@ public class VentanaJuego extends JPanel implements Observer {
 		JPanel panelTexto = new JPanel();
 		panelDerecho.add(panelTexto, BorderLayout.SOUTH);
 
-		JLabel labelRiesgoMinimo = new JLabel("Riesgo Minimo: ");
-		panelTexto.add(labelRiesgoMinimo);
+		labelCuelloDeBotella = new JLabel("Cuello de Botella: ");
+		panelTexto.add(labelCuelloDeBotella);
 
 		JPanel panelSuperior = new JPanel();
 		add(panelSuperior, BorderLayout.NORTH);
@@ -89,8 +87,8 @@ public class VentanaJuego extends JPanel implements Observer {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controlador.calcularMST();
-				double riesgoMinimo = controlador.calcularRiesgoMinimo();
-				labelRiesgoMinimo.setText("Riesgo Minimo: " + String.format("%.2f", riesgoMinimo));
+				double cuelloDeBotella = controlador.calcularCuelloDeBotella();
+				labelCuelloDeBotella.setText("Cuello de Botella: " + String.format("%.2f", cuelloDeBotella));
 				panelCentral.revalidate();
 				panelCentral.repaint();
 			}
@@ -150,8 +148,12 @@ public class VentanaJuego extends JPanel implements Observer {
 					{
 						int nodoA = arista[0];
 						int nodoB = arista[1];
+						int[] coordsA = coordenadas.get(nodoA);
+				        int[] coordsB = coordenadas.get(nodoB);
+						if (coordsA != null && coordsB != null) {
 						dibujo.drawLine(coordenadas.get(nodoA)[0] + 10, coordenadas.get(nodoA)[1] + 10,
 								coordenadas.get(nodoB)[0] + 10, coordenadas.get(nodoB)[1] + 10);
+						}
 					}
 				
 	}
@@ -168,6 +170,8 @@ public class VentanaJuego extends JPanel implements Observer {
 	public void limpiarTabla()
 	{
 		modeloTabla.setRowCount(0);
+		labelCuelloDeBotella.setText("Cuello de Botella: ");
+		
 		
 	}
 

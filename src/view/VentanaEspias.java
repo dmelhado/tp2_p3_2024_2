@@ -32,13 +32,13 @@ public class VentanaEspias {
 
 	private void ventanaEspias() {
 		frameAgentes = new JFrame("Agregar Agente");
+		frameAgentes.setTitle("Agregar Agentes");
 		frameAgentes.getContentPane().setBackground(Color.BLACK);
 		frameAgentes.getContentPane().setForeground(Color.BLACK);
 		frameAgentes.setBounds(100, 100, 300, 300);
 		frameAgentes.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frameAgentes.getContentPane().setLayout(new BorderLayout(0, 0));
 
-		// PANELES //
 		JPanel panelCentral = new JPanel();
 		frameAgentes.getContentPane().add(panelCentral, BorderLayout.CENTER);
 		panelCentral.setLayout(new GridLayout(5, 1, 0, 0));
@@ -100,7 +100,6 @@ public class VentanaEspias {
 		JLabel labelVacio1 = new JLabel("");
 		panelCentral.add(labelVacio1);
 
-		// LABELS //
 		JLabel labelTextoAgregarAgente = new JLabel("Agrega un Agente");
 		labelTextoAgregarAgente.setForeground(new Color(255, 255, 255));
 		labelTextoAgregarAgente.setHorizontalAlignment(SwingConstants.CENTER);
@@ -122,6 +121,7 @@ public class VentanaEspias {
 
 	public void abrirVentana() {
 		frameAgentes.setVisible(true);
+		
 	}
 
 	public void cerrarVentana() {

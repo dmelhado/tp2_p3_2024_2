@@ -2,7 +2,6 @@ package controller;
 
 import java.util.HashMap;
 
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import view.PantallaPrincipal;
 import view.VentanaEspias;
@@ -50,6 +49,7 @@ public class VentanaMenuControlador {
 			ventanaConexiones.limpiarComboBox();
 		}
 		pantallaPrincipal.getControladorJuego().getVentanaJuego().limpiarTabla();
+		pantallaPrincipal.getControladorJuego().limpiarTodo();
 		
 	}
 	
@@ -57,6 +57,10 @@ public class VentanaMenuControlador {
 	{
 		DefaultTableModel modeloTabla = ventanaMenu.getModeloTabla();
 		int numeroFila = modeloTabla.getRowCount();
+		if (numeroFila == 0) {
+			ventanaMenu.mostrarMensajeNoConexiones();
+		        return;
+		}
 		HashMap<String, Boolean> mapaEspias = new HashMap<>();
 		for (int i = 0; i < numeroFila; i++) {
 			String espia1 = modeloTabla.getValueAt(i, 0).toString().split("-")[0];
@@ -92,12 +96,7 @@ public class VentanaMenuControlador {
 	{
 		boolean existeEspia = ventanaMenu.getListaEspias().stream().anyMatch(espia -> espia.equalsIgnoreCase(nombreEspia));
 		if (existeEspia) {
-	        JOptionPane.showMessageDialog(
-	            ventanaMenu, 
-	            "El espía '" + nombreEspia + "' ya existe, ingrese otro.", 
-	            "Error", 
-	            JOptionPane.WARNING_MESSAGE
-	        );
+	        ventanaMenu.mostrarMensajeVerificacionEspia(nombreEspia);
 	    } else {
 	        ventanaMenu.agregarTablaEspias(nombreEspia);
 	    }

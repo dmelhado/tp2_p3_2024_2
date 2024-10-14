@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
@@ -42,6 +43,7 @@ public class VentanaConexiones {
 		frame.setBounds(100, 100, 400, 400);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		frame.setTitle("Conexiones");
 
 		// PANELES //
 		JPanel panelIzquierdo = new JPanel();
@@ -133,7 +135,7 @@ public class VentanaConexiones {
 		});
 		panelInferior.add(botonVolverAlMenu);
 
-		JButton botonAgregarArista = new JButton("Agregar Arista");
+		JButton botonAgregarArista = new JButton("Agregar Conexión");
 		botonAgregarArista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String espia1 = (String) comboBoxEspia1.getSelectedItem();
@@ -147,6 +149,7 @@ public class VentanaConexiones {
 
 	public void abrirVentana() {
 		actualizarComboBoxes();
+		frame.setLocationRelativeTo(ventanaMenu);
 		frame.setVisible(true);
 	}
 
@@ -163,6 +166,22 @@ public class VentanaConexiones {
 		comboBoxEspia1.removeAllItems();
 		comboBoxEspia2.removeAllItems();
 	}
+	
+	public void mostrarMensajeBucleONoSeleccionado(String espia1, String espia2, String probabilidadTexto)
+	{
+		JOptionPane.showMessageDialog(ventanaMenu, "No se admiten Bucles o no se seleccionaron Espias",
+				"Error de Conexión", JOptionPane.WARNING_MESSAGE);
+		return;
+	}
+	
+	public void mostrarMensajeYaExisteConexion(String espia1, String espia2, String probabiliadTexto)
+	{
+		JOptionPane.showMessageDialog(ventanaMenu,
+				"La conexión entre '" + espia1 + "' y '" + espia2 + "' ya existe.", "Error de Conexión",
+				JOptionPane.WARNING_MESSAGE);
+		return;
+	}
+	
 
 	public void setControlador(VentanaConexionesControlador controlador) {
 		this.controlador = controlador;

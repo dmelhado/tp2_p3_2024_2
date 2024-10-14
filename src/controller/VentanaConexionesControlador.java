@@ -1,6 +1,5 @@
 package controller;
 
-import javax.swing.JOptionPane;
 
 import view.VentanaConexiones;
 import view.VentanaMenu;
@@ -18,14 +17,11 @@ public class VentanaConexionesControlador {
 
 	public void agregarArista(String espia1, String espia2, String probabilidadTexto) {
 		if (espia1 == null && espia2 == null || espia1.equals(espia2)) {
-			JOptionPane.showMessageDialog(ventanaMenu, "No se admiten Bucles o no se seleccionaron Espias",
-					"Error de Conexión", JOptionPane.WARNING_MESSAGE);
+			ventanaConexiones.mostrarMensajeBucleONoSeleccionado(espia1, espia2, probabilidadTexto);
 			return;
 		}
 		if (ventanaMenu.getControlador().existeConexion(espia1, espia2)) {
-			JOptionPane.showMessageDialog(ventanaMenu,
-					"La conexión entre '" + espia1 + "' y '" + espia2 + "' ya existe.", "Error de Conexión",
-					JOptionPane.WARNING_MESSAGE);
+			ventanaConexiones.mostrarMensajeYaExisteConexion(espia1, espia2, probabilidadTexto);
 		} else {
 			Double.parseDouble(probabilidadTexto.replace(",", "."));
 			ventanaMenu.agregarTablaAristaProbabilidad(espia1, espia2, probabilidadTexto);

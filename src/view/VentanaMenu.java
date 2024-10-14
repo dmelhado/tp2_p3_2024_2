@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -16,12 +17,11 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-
 import controller.VentanaMenuControlador;
 
 public class VentanaMenu extends JPanel {
 	private static final long serialVersionUID = 1L;
-	
+
 	private JTable tablaConexiones;
 	private DefaultTableModel modeloTabla;
 	private DefaultTableModel modeloTablaEspias;
@@ -118,9 +118,9 @@ public class VentanaMenu extends JPanel {
 		botonCrearGrafo.setPreferredSize(new Dimension(150, 50));
 		panelInferior.add(botonCrearGrafo);
 
-		JButton botonAgregarAristas = new JButton("Agregar Aristas");
-		panelBoton1.add(botonAgregarAristas);
-		botonAgregarAristas.addActionListener(new ActionListener() {
+		JButton botonAgregarConexiones = new JButton("Agregar Conexiones");
+		panelBoton1.add(botonAgregarConexiones);
+		botonAgregarConexiones.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				controlador.abrirVentanaConexiones();
@@ -137,7 +137,7 @@ public class VentanaMenu extends JPanel {
 	}
 
 	public void agregarTablaEspias(String nombreEspia) {
-		
+
 		DefaultTableModel modeloTablaEspias = (DefaultTableModel) tablaNombreEspias.getModel();
 		modeloTablaEspias.addRow(new Object[] { nombreEspia });
 		listaEspias.add(nombreEspia);
@@ -162,6 +162,25 @@ public class VentanaMenu extends JPanel {
 		listaEspias.clear();
 
 	}
+	
+	public void mostrarMensajeNoConexiones() {
+		JOptionPane.showMessageDialog(this,
+				"No hay conexiones de aristas. Por favor, agregue conexiones antes de crear el grafo.", "Error",
+				JOptionPane.ERROR_MESSAGE);
+		return;
+
+	}
+	
+	public void mostrarMensajeVerificacionEspia(String nombreEspia)
+	{
+		 JOptionPane.showMessageDialog(
+		            this, 
+		            "El espía '" + nombreEspia + "' ya existe, ingrese otro.", 
+		            "Error", 
+		            JOptionPane.WARNING_MESSAGE
+		        );
+		 return;
+	}
 
 	public void setControlador(VentanaMenuControlador controlador) {
 		this.controlador = controlador;
@@ -174,9 +193,10 @@ public class VentanaMenu extends JPanel {
 	public ArrayList<String> getListaEspias() {
 		return listaEspias;
 	}
-	
-	public VentanaMenuControlador getControlador()
-	{
+
+	public VentanaMenuControlador getControlador() {
 		return controlador;
 	}
+
+	
 }
