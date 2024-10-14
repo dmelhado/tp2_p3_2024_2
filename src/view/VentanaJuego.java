@@ -17,12 +17,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
-import controller.Observer;
+import controller.ObservadorInterfaz;
 import controller.VentanaJuegoControlador;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
 
-public class VentanaJuego extends JPanel implements Observer {
+public class VentanaJuego extends JPanel implements ObservadorInterfaz {
 
 	private static final long serialVersionUID = 1L;
 	

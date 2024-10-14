@@ -4,20 +4,20 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class MST {
+public class AGM {
 
-	public static <T> WeightedGraph<T> generateMST(WeightedGraph<T> g) {
+	public static <T> GrafoPonderado<T> generateMST(GrafoPonderado<T> g) {
 		
 		if(!g.esConexo()) {
 			throw new RuntimeException("No se crear un AGM de un grafo disconexo.");
 		}
 		
 		// generamos un arbol vacio al que le vamos a meter las cosas
-		WeightedGraph<T> resultado = new WeightedGraph<T>();
+		GrafoPonderado<T> resultado = new GrafoPonderado<T>();
 				
 		// traemos toda la data
 		HashMap<Integer, T> nodos = g.getTodosLosNodos();
-		HashMap<Integer, Edge> aristas = g.getTodasLasAristas();
+		HashMap<Integer, Arista> aristas = g.getTodasLasAristas();
 		
 		if(nodos.size() == 0) {
 			return resultado;
@@ -37,7 +37,7 @@ public class MST {
 		while(setNodos.size() < nodos.size()) {
 			
 			// traemos la minima arista disponible
-			Edge aristaMinima = minimumAvailableEdge(setNodos, aristas.values());
+			Arista aristaMinima = minimumAvailableEdge(setNodos, aristas.values());
 			
 			// realmente no sabemos cual es el nodo de la arista que hay que agregar
 			if(setNodos.contains(aristaMinima.a())) {
@@ -55,12 +55,12 @@ public class MST {
 	}
 	
 	// devuelve la arista con menor peso que no este conectada a alguno de los nodos
-	private static Edge minimumAvailableEdge(HashSet<Integer> nodos, Collection<Edge> todasLasAristas) {
+	private static Arista minimumAvailableEdge(HashSet<Integer> nodos, Collection<Arista> todasLasAristas) {
 		double pesoMinimo = Double.POSITIVE_INFINITY;
-		Edge resultado = null;
+		Arista resultado = null;
 		
 		// TODO: esta implementacion es horrible. considerar usar un MinHeap de aristas ordenados por peso en lugar de for's anidados
-		for(Edge arista : todasLasAristas) {
+		for(Arista arista : todasLasAristas) {
 			for(Integer n : nodos) {
 				
 				// si se cumplen estas 3 condiciones, actualizamos el minimo

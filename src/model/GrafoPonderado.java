@@ -8,18 +8,18 @@ import java.util.Set;
 
 import controller.Observador;
 
-public class WeightedGraph<T> extends Observador {
+public class GrafoPonderado<T> extends Observador {
 
 	private HashMap<Integer, T> nodos;
-	private HashMap<Integer, Edge> aristas;
+	private HashMap<Integer, Arista> aristas;
 	private int generadorIdNodo;
 	private int generadorIdArista;
 
-	public WeightedGraph() {
+	public GrafoPonderado() { 
 		this.generadorIdNodo = 0;
 		this.generadorIdArista = 0;
 		this.nodos = new HashMap<Integer, T>();
-		this.aristas = new HashMap<Integer, Edge>();
+		this.aristas = new HashMap<Integer, Arista>();
 	}
 
 	public int put(T data) {
@@ -72,7 +72,7 @@ public class WeightedGraph<T> extends Observador {
 		//}
 
 		int idArista = this.generadorIdArista;
-		this.aristas.put(idArista, new Edge(nodeA, nodeB, weight));
+		this.aristas.put(idArista, new Arista(nodeA, nodeB, weight));
 		this.generadorIdArista++;
 		notificarObservador();
 		return idArista;
@@ -123,7 +123,7 @@ public class WeightedGraph<T> extends Observador {
 		return this.nodos;
 	}
 
-	public HashMap<Integer, Edge> getTodasLasAristas() {
+	public HashMap<Integer, Arista> getTodasLasAristas() {
 		return this.aristas;
 	}
 
@@ -180,7 +180,7 @@ public class WeightedGraph<T> extends Observador {
 			throw new RuntimeException("El grafo no contiene aristas");
 		}
 		double res = Double.NEGATIVE_INFINITY;
-		for (Edge e : this.aristas.values()) {
+		for (Arista e : this.aristas.values()) {
 			if (res < e.getPeso()) {
 				res = e.getPeso();
 			}
@@ -196,7 +196,7 @@ public class WeightedGraph<T> extends Observador {
 
 		HashSet<Integer> res = new HashSet<Integer>();
 
-		for (Edge e : this.aristas.values()) {
+		for (Arista e : this.aristas.values()) {
 
 			if (e.connects(nodo)) {
 				res.add(e.getOtroExtremo(nodo));

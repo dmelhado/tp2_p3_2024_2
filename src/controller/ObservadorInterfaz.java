@@ -1,6 +1,6 @@
 package controller;
 
-public interface Observer {
+public interface ObservadorInterfaz {
 	void actualizar();
 
 }

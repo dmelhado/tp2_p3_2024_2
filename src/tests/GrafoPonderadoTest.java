@@ -7,15 +7,15 @@ import java.util.LinkedList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import model.WeightedGraph;
+import model.GrafoPonderado;
 
-public class WeightedGraphTest {
+public class GrafoPonderadoTest {
 
-	private WeightedGraph<String> graph;
+	private GrafoPonderado<String> graph;
 
 	@BeforeEach
 	public void setUp() {
-		graph = new WeightedGraph<String>();
+		graph = new GrafoPonderado<String>();
 	}
 
 	@Test

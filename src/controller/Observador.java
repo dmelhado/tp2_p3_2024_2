@@ -4,21 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Observador {
-	private List<Observer> observadores = new ArrayList<>();
+	private List<ObservadorInterfaz> observadores = new ArrayList<>();
 	
-	public void añadirObservador(Observer observer)
+	public void añadirObservador(ObservadorInterfaz observer)
 	{
 		observadores.add(observer);
 	}
 	
-	public void eliminarObservador(Observer observer)
+	public void eliminarObservador(ObservadorInterfaz observer)
 	{
 		observadores.remove(observer);
 	}
 	
 	protected void notificarObservador()
 	{
-		for (Observer observer : observadores)
+		for (ObservadorInterfaz observer : observadores)
 		{
 			observer.actualizar();
 		}

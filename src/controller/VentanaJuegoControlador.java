@@ -4,27 +4,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import model.Edge;
-import model.MST;
-import model.WeightedGraph;
+import model.Arista;
+import model.AGM;
+import model.GrafoPonderado;
 import view.VentanaJuego;
 
 public class VentanaJuegoControlador {
-	private WeightedGraph<String> grafo;
-	private WeightedGraph<String> mst;
+	private GrafoPonderado<String> grafo;
+	private GrafoPonderado<String> mst;
 	private HashMap<Integer, int[]> coordenadas = new HashMap<>();
 	private VentanaJuego ventana;
 	
-	public VentanaJuegoControlador(WeightedGraph<String> grafo, VentanaJuego ventana)
+	public VentanaJuegoControlador(GrafoPonderado<String> grafo, VentanaJuego ventana)
 	{
-		this.grafo = new WeightedGraph<String>();
-		this.mst = new WeightedGraph<String>();
+		this.grafo = new GrafoPonderado<String>();
+		this.mst = new GrafoPonderado<String>();
 		this.ventana = ventana;
 		this.ventana.setControlador(this);
 	}
 	
 	public void crearGrafo(String[] espias, String[][] conexiones) {
-		this.grafo = new WeightedGraph<>();		
+		this.grafo = new GrafoPonderado<>();		
 		HashMap<String, Integer> nodos = new HashMap<>();
 		for (String espia : espias) {
 			int idNodo = grafo.put(espia);
@@ -81,7 +81,7 @@ public class VentanaJuegoControlador {
 	 public List<int[]> obtenerDatosMST() {
 			List<int[]> mstDatos = new ArrayList<>();
 			if (mst != null) {
-				for (Edge arista : mst.getTodasLasAristas().values()) {
+				for (Arista arista : mst.getTodasLasAristas().values()) {
 					int[] datos = { arista.a(), arista.b() };
 					mstDatos.add(datos);
 				} 
@@ -93,13 +93,13 @@ public class VentanaJuegoControlador {
 	public void calcularMST()
 	{
 		if (grafo != null && grafo.esConexo()) {
-			mst = MST.generateMST(grafo);
+			mst = AGM.generateMST(grafo);
 			
 			Object[][] datos = new Object[mst.getTodasLasAristas().size()][2];
 			int puntero = 0;
 			for (Integer idArista : mst.getTodasLasAristas().keySet())
 			{
-				Edge arista = mst.getTodasLasAristas().get(idArista);
+				Arista arista = mst.getTodasLasAristas().get(idArista);
 				String nodoA = grafo.getData(arista.a());
 				String nodoB = grafo.getData(arista.b());
 				double probabilidad = arista.getPeso();
@@ -149,8 +149,8 @@ public class VentanaJuegoControlador {
 	}
 
 	public void limpiarTodo() {
-		grafo = new WeightedGraph<String>();
-		mst = new WeightedGraph<String>();
+		grafo = new GrafoPonderado<String>();
+		mst = new GrafoPonderado<String>();
 		
 	}
 		

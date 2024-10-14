@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 import controller.VentanaJuegoControlador;
 import controller.VentanaMenuControlador;
-import model.WeightedGraph;
+import model.GrafoPonderado;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -24,7 +24,7 @@ public class PantallaPrincipal extends JFrame {
 	private VentanaMenu ventanaMenu;
 	private VentanaJuego ventanaJuego;
 	private CardLayout cardLayout;
-	private WeightedGraph<String> grafo;
+	private GrafoPonderado<String> grafo;
 	private VentanaJuegoControlador controlador;
 	private VentanaMenuControlador controladorMenu;
 
@@ -69,7 +69,7 @@ public class PantallaPrincipal extends JFrame {
 		this.cardLayout = new CardLayout();
 		getContentPane().setLayout(cardLayout);
 
-		this.grafo = new WeightedGraph<>();
+		this.grafo = new GrafoPonderado<>();
 		this.ventanaMenu = new VentanaMenu(this);
 		this.controladorMenu = new VentanaMenuControlador(ventanaMenu, this);
 		this.ventanaJuego = new VentanaJuego(controlador);

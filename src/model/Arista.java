@@ -1,12 +1,12 @@
 package model;
 
-public class Edge {
+public class Arista {
 
 	private int nodoA;
 	private int nodoB;
 	private double peso;
 	
-	public Edge(int a, int b, double w) {
+	public Arista(int a, int b, double w) {
 		if(w < 0 || w > 1) {
 			throw new RuntimeException("no se admiten pesos fuera de [0,1]");
 		}
