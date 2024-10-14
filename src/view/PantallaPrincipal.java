@@ -14,6 +14,8 @@ import model.WeightedGraph;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 public class PantallaPrincipal extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -29,7 +31,22 @@ public class PantallaPrincipal extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
+		 try {
+	            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+	                if ("Nimbus".equals(info.getName())) {
+	                    UIManager.setLookAndFeel(info.getClassName());
+	                    break;
+	                }
+	            }
+	        } catch (Exception e) {
+	            try {
+	                UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+	            } catch (Exception e2) {
+	                e2.printStackTrace();
+	            }
+	        }
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -41,7 +58,6 @@ public class PantallaPrincipal extends JFrame {
 			}
 		});
 	}
-
 	/**
 	 * Create the application.
 	 */
