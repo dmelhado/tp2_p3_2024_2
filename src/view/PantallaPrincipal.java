@@ -26,8 +26,6 @@ public class PantallaPrincipal extends JFrame {
 	private CardLayout cardLayout;
 	private GrafoPonderado<String> grafo;
 	private VentanaJuegoControlador controlador;
-	private VentanaMenuControlador controladorMenu;
-
 	/**
 	 * Launch the application.
 	 */
@@ -72,7 +70,6 @@ public class PantallaPrincipal extends JFrame {
 
 		this.grafo = new GrafoPonderado<>();
 		this.ventanaMenu = new VentanaMenu(this);
-		this.controladorMenu = new VentanaMenuControlador(ventanaMenu, this);
 		this.ventanaJuego = new VentanaJuego(controlador);
 		this.controlador = new VentanaJuegoControlador(grafo, ventanaJuego);
 

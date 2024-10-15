@@ -31,6 +31,7 @@ public class VentanaMenu extends JPanel {
 
 	public VentanaMenu(PantallaPrincipal pantallaPrincipal) {
 		this.listaEspias = new ArrayList<>();
+		this.controlador = new VentanaMenuControlador(this, pantallaPrincipal);
 		MenuJuego();
 
 	}
