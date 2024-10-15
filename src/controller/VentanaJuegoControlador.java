@@ -100,7 +100,8 @@ public class VentanaJuegoControlador {
 			ventana.actualizar();
 
 		} else {
-			agm = null;
+			ventana.mostrarMensajeNoEsConexo();
+			
 		}
 	}
 
@@ -115,7 +116,12 @@ public class VentanaJuegoControlador {
 	}
 
 	public double calcularCuelloDeBotella() {
-		return agm.obtenerMaximoPeso();
+		if (agm != null) {
+			return agm.obtenerMaximoPeso();
+		} else {
+			return 0.0;
+		}
+		 
 	}
 
 	public String getNombreEspia(int i) {

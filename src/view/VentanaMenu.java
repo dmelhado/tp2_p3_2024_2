@@ -166,7 +166,7 @@ public class VentanaMenu extends JPanel {
 
 	public void mostrarMensajeNoConexiones() {
 		JOptionPane.showMessageDialog(this,
-				"No hay conexiones de aristas. Por favor, agregue conexiones antes de crear el grafo.", "Error",
+				"No se puede generar un Arbol Minimo. La Red es disconexa.", "Error",
 				JOptionPane.ERROR_MESSAGE);
 		return;
 

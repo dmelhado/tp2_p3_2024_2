@@ -21,6 +21,7 @@ import controller.ObservadorInterfaz;
 import controller.VentanaJuegoControlador;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class VentanaJuego extends JPanel implements ObservadorInterfaz {
 
@@ -175,6 +176,14 @@ public class VentanaJuego extends JPanel implements ObservadorInterfaz {
 
 	public void setControlador(VentanaJuegoControlador controlador) {
 		this.controlador = controlador;
+	}
+
+	public void mostrarMensajeNoEsConexo() {
+		JOptionPane.showMessageDialog(this,
+				"El Grafo no es Conexo, por favor si desea generar un Arbol Minimo tiene que crear uno", "Error",
+				JOptionPane.ERROR_MESSAGE);
+		return;
+		
 	}
 
 }
