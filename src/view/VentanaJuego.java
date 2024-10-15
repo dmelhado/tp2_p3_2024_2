@@ -180,7 +180,7 @@ public class VentanaJuego extends JPanel implements ObservadorInterfaz {
 
 	public void mostrarMensajeNoEsConexo() {
 		JOptionPane.showMessageDialog(this,
-				"El Grafo no es Conexo, por favor si desea generar un Arbol Minimo tiene que crear uno", "Error",
+				"No se puede generar un Arbol Minimo. La Red es disconexa.", "Error",
 				JOptionPane.ERROR_MESSAGE);
 		return;
 		
