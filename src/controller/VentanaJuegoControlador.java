@@ -139,7 +139,9 @@ public class VentanaJuegoControlador {
 
 	public void limpiarTodo() {
 		grafo = new GrafoPonderado<String>();
-		agm = new GrafoPonderado<String>();
+		coordenadas = new HashMap<>();
+		agm = null;
+		ventana.actualizar();
 
 	}
 
