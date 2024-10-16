@@ -9,7 +9,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import controller.VentanaJuegoControlador;
-import controller.VentanaMenuControlador;
 import model.GrafoPonderado;
 
 import java.awt.event.ActionListener;
@@ -26,9 +25,6 @@ public class PantallaPrincipal extends JFrame {
 	private CardLayout cardLayout;
 	private GrafoPonderado<String> grafo;
 	private VentanaJuegoControlador controlador;
-	/**
-	 * Launch the application.
-	 */
 
 	public static void main(String[] args) {
 		try {
@@ -57,9 +53,6 @@ public class PantallaPrincipal extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public PantallaPrincipal() {
 		setTitle("Temible Operario del Recontraespionaje");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -81,9 +74,6 @@ public class PantallaPrincipal extends JFrame {
 		repaint();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	public void cambiarVentana(String ventana) {
 		if (ventana.equals(getS_VENTANAJUEGO())) {
 			agregarMenuProyecto();

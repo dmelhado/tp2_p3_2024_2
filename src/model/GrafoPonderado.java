@@ -15,7 +15,7 @@ public class GrafoPonderado<T> extends Observador {
 	private int generadorIdNodo;
 	private int generadorIdArista;
 
-	public GrafoPonderado() { 
+	public GrafoPonderado() {
 		this.generadorIdNodo = 0;
 		this.generadorIdArista = 0;
 		this.nodos = new HashMap<Integer, T>();
@@ -63,9 +63,9 @@ public class GrafoPonderado<T> extends Observador {
 
 	public int setConexion(int nodeA, int nodeB, double weight) {
 		// TODO: Chequear esto, ya que con el if tira error al generar el AGS
-		//if (!this.contieneNodo(nodeA) || !this.contieneNodo(nodeB)) {
-		//	throw new RuntimeException("Uno de los nodos no existe");
-		//}
+		// if (!this.contieneNodo(nodeA) || !this.contieneNodo(nodeB)) {
+		// throw new RuntimeException("Uno de los nodos no existe");
+		// }
 
 		int idArista = this.generadorIdArista;
 		this.aristas.put(idArista, new Arista(nodeA, nodeB, weight));

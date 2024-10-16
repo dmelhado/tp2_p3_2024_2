@@ -12,7 +12,7 @@ public class AGM {
 			throw new RuntimeException("No se puede crear un AGM de un grafo disconexo.");
 		}
 
-		// generamos un arbol vacio al que le vamos a meter las cosas
+		// generamos un arbol vacio
 		GrafoPonderado<T> resultado = new GrafoPonderado<T>();
 
 		// traemos toda la data

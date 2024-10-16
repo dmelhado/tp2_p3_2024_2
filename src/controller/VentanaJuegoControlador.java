@@ -101,7 +101,7 @@ public class VentanaJuegoControlador {
 
 		} else {
 			ventana.mostrarMensajeNoEsConexo();
-			
+
 		}
 	}
 
@@ -121,7 +121,7 @@ public class VentanaJuegoControlador {
 		} else {
 			return 0.0;
 		}
-		 
+
 	}
 
 	public String getNombreEspia(int i) {

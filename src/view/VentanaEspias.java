@@ -21,8 +21,8 @@ import java.awt.Color;
 
 public class VentanaEspias {
 
-	private JFrame frameAgentes;
-	private JTextField fieldNombreAgente;
+	private JFrame frameEspias;
+	private JTextField fieldNombreEspia;
 	private VentanaEspiasControlador controlador;
 
 	public VentanaEspias(VentanaMenu ventanaMenu) {
@@ -31,43 +31,43 @@ public class VentanaEspias {
 	}
 
 	private void ventanaEspias() {
-		frameAgentes = new JFrame("Agregar Agente");
-		frameAgentes.setTitle("Agregar Agentes");
-		frameAgentes.getContentPane().setBackground(Color.BLACK);
-		frameAgentes.getContentPane().setForeground(Color.BLACK);
-		frameAgentes.setBounds(100, 100, 300, 300);
-		frameAgentes.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frameAgentes.getContentPane().setLayout(new BorderLayout(0, 0));
+		frameEspias = new JFrame("Agregar Espia");
+		frameEspias.setTitle("Agregar Espias");
+		frameEspias.getContentPane().setBackground(Color.BLACK);
+		frameEspias.getContentPane().setForeground(Color.BLACK);
+		frameEspias.setBounds(100, 100, 300, 300);
+		frameEspias.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frameEspias.getContentPane().setLayout(new BorderLayout(0, 0));
 
 		JPanel panelCentral = new JPanel();
-		frameAgentes.getContentPane().add(panelCentral, BorderLayout.CENTER);
+		frameEspias.getContentPane().add(panelCentral, BorderLayout.CENTER);
 		panelCentral.setLayout(new GridLayout(5, 1, 0, 0));
-		ImageIcon imagenAgente = new ImageIcon("docs/Spy.jpg");
-		Image image = imagenAgente.getImage();
+		ImageIcon imagenEspia = new ImageIcon("docs/Spy.jpg");
+		Image image = imagenEspia.getImage();
 		Image newimg = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
-		imagenAgente = new ImageIcon(newimg);
+		imagenEspia = new ImageIcon(newimg);
 		JLabel labelImagen = new JLabel();
 		labelImagen.setHorizontalAlignment(SwingConstants.CENTER);
-		labelImagen.setIcon(imagenAgente);
+		labelImagen.setIcon(imagenEspia);
 		panelCentral.add(labelImagen);
 
 		JPanel panelDerecho = new JPanel();
-		frameAgentes.getContentPane().add(panelDerecho, BorderLayout.EAST);
+		frameEspias.getContentPane().add(panelDerecho, BorderLayout.EAST);
 		panelDerecho.setPreferredSize(new Dimension(50, 90));
 
 		JPanel panelIzquierdo = new JPanel();
-		frameAgentes.getContentPane().add(panelIzquierdo, BorderLayout.WEST);
+		frameEspias.getContentPane().add(panelIzquierdo, BorderLayout.WEST);
 		panelIzquierdo.setPreferredSize(new Dimension(50, 90));
 
-		fieldNombreAgente = new JTextField();
-		panelCentral.add(fieldNombreAgente);
-		fieldNombreAgente.setColumns(10);
-		fieldNombreAgente.addActionListener(new ActionListener() {
+		fieldNombreEspia = new JTextField();
+		panelCentral.add(fieldNombreEspia);
+		fieldNombreEspia.setColumns(10);
+		fieldNombreEspia.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String espia = fieldNombreAgente.getText();
+				String espia = fieldNombreEspia.getText();
 				controlador.agregarEspia(espia);
-				fieldNombreAgente.setText("");
+				fieldNombreEspia.setText("");
 
 			}
 		});
@@ -76,20 +76,16 @@ public class VentanaEspias {
 		panelCentral.add(labelVacio);
 
 		JPanel panelInferior = new JPanel();
-		frameAgentes.getContentPane().add(panelInferior, BorderLayout.SOUTH);
+		frameEspias.getContentPane().add(panelInferior, BorderLayout.SOUTH);
 
-		// LABELS //
-		JLabel lblNewLabel = new JLabel("Agrega un Agente");
-		lblNewLabel.setForeground(new Color(192, 192, 192));
-		// BOTONES //
-		JButton botonAgregarAgente = new JButton("Agregar");
-		panelCentral.add(botonAgregarAgente);
-		botonAgregarAgente.addActionListener(new ActionListener() {
+		JButton botonAgregarEspia = new JButton("Agregar");
+		panelCentral.add(botonAgregarEspia);
+		botonAgregarEspia.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String espia = fieldNombreAgente.getText();
+				String espia = fieldNombreEspia.getText();
 				controlador.agregarEspia(espia);
-				fieldNombreAgente.setText("");
+				fieldNombreEspia.setText("");
 
 			}
 
@@ -98,11 +94,11 @@ public class VentanaEspias {
 		JLabel labelVacio1 = new JLabel("");
 		panelCentral.add(labelVacio1);
 
-		JLabel labelTextoAgregarAgente = new JLabel("Agrega un Agente");
-		labelTextoAgregarAgente.setForeground(new Color(255, 255, 255));
-		labelTextoAgregarAgente.setHorizontalAlignment(SwingConstants.CENTER);
-		labelTextoAgregarAgente.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
-		frameAgentes.getContentPane().add(labelTextoAgregarAgente, BorderLayout.NORTH);
+		JLabel labelTextoAgregarEspia = new JLabel("Agrega un Espia");
+		labelTextoAgregarEspia.setForeground(new Color(255, 255, 255));
+		labelTextoAgregarEspia.setHorizontalAlignment(SwingConstants.CENTER);
+		labelTextoAgregarEspia.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
+		frameEspias.getContentPane().add(labelTextoAgregarEspia, BorderLayout.NORTH);
 
 		JButton botonVolverAlMenu = new JButton("Volver al Menu");
 		panelInferior.add(botonVolverAlMenu);
@@ -118,12 +114,12 @@ public class VentanaEspias {
 	}
 
 	public void abrirVentana() {
-		frameAgentes.setVisible(true);
+		frameEspias.setVisible(true);
 
 	}
 
 	public void cerrarVentana() {
-		frameAgentes.dispose();
+		frameEspias.dispose();
 	}
 
 	public void setControlador(VentanaEspiasControlador controlador) {

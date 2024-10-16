@@ -179,11 +179,10 @@ public class VentanaJuego extends JPanel implements ObservadorInterfaz {
 	}
 
 	public void mostrarMensajeNoEsConexo() {
-		JOptionPane.showMessageDialog(this,
-				"No se puede generar un Arbol Minimo. La Red es disconexa.", "Error",
+		JOptionPane.showMessageDialog(this, "No se puede generar un Arbol Minimo. La Red es disconexa.", "Error",
 				JOptionPane.ERROR_MESSAGE);
 		return;
-		
+
 	}
 
 }
