@@ -46,7 +46,7 @@ public class VentanaJuegoControlador {
 		if (tamañoNodos == 0) {
 			return coordenadas;
 		}
-		double radio = Math.min(ancho, altura) / 3;
+		double radio = Math.min(ancho, altura) / 2.5;
 		double centerX = ancho / 2.0;
 		double centerY = altura / 2.0;
 
