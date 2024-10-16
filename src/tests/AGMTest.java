@@ -30,14 +30,14 @@ public class AGMTest {
 		this.graph.setConexion(1, 3, 0.6);
 		this.graph.setConexion(2, 3, 0.02);
 
-		GrafoPonderado<String> test_mst = AGM.obtenerAGM(this.graph);
+		GrafoPonderado<String> test_agm = AGM.obtenerAGM(this.graph);
 
-		assertTrue(test_mst.consultarArista(0, 1), "Deberia contener la arista 0-1 con 0.2");
-		assertFalse(test_mst.consultarArista(0, 2), "No deberia contener la arista 0-2 con 0.3");
-		assertFalse(test_mst.consultarArista(0, 3), "No deberia contener la arista 0-3 con 0.4");
-		assertTrue(test_mst.consultarArista(1, 2), "Deberia contener la arista 1-2 con 0.01");
-		assertFalse(test_mst.consultarArista(1, 3), "No deberia contener la arista 1-3 con 0.6");
-		assertTrue(test_mst.consultarArista(2, 3), "Deberia contener la arista 2-3 con 0.02");
+		assertTrue(test_agm.consultarArista(0, 1), "Deberia contener la arista 0-1 con 0.2");
+		assertFalse(test_agm.consultarArista(0, 2), "No deberia contener la arista 0-2 con 0.3");
+		assertFalse(test_agm.consultarArista(0, 3), "No deberia contener la arista 0-3 con 0.4");
+		assertTrue(test_agm.consultarArista(1, 2), "Deberia contener la arista 1-2 con 0.01");
+		assertFalse(test_agm.consultarArista(1, 3), "No deberia contener la arista 1-3 con 0.6");
+		assertTrue(test_agm.consultarArista(2, 3), "Deberia contener la arista 2-3 con 0.02");
 	}
 
 }

@@ -87,7 +87,7 @@ public class VentanaJuego extends JPanel implements ObservadorInterfaz {
 		botonGenerarArbolMinimo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controlador.calcularMST();
+				controlador.calcularAGM();
 				double cuelloDeBotella = controlador.calcularCuelloDeBotella();
 				labelCuelloDeBotella.setText("Cuello de Botella: " + String.format("%.2f", cuelloDeBotella));
 				panelCentral.revalidate();
@@ -141,7 +141,7 @@ public class VentanaJuego extends JPanel implements ObservadorInterfaz {
 			return;
 		dibujo.setColor(Color.RED);
 		((Graphics2D) dibujo).setStroke(new BasicStroke(5.0f));
-		List<int[]> mstDatos = controlador.obtenerDatosMST();
+		List<int[]> mstDatos = controlador.obtenerDatosAGM();
 		for (int[] arista : mstDatos) {
 			int nodoA = arista[0];
 			int nodoB = arista[1];

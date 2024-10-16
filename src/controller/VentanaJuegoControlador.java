@@ -73,18 +73,18 @@ public class VentanaJuegoControlador {
 		return aristasDatos;
 	}
 
-	public List<int[]> obtenerDatosMST() {
-		List<int[]> mstDatos = new ArrayList<>();
+	public List<int[]> obtenerDatosAGM() {
+		List<int[]> agmDatos = new ArrayList<>();
 		if (agm != null) {
 			for (Arista arista : agm.getTodasLasAristas().values()) {
 				int[] datos = { arista.a(), arista.b() };
-				mstDatos.add(datos);
+				agmDatos.add(datos);
 			}
 		}
-		return mstDatos;
+		return agmDatos;
 	}
 
-	public void calcularMST() {
+	public void calcularAGM() {
 		if (grafo != null && grafo.esConexo()) {
 			agm = AGM.obtenerAGM(grafo);
 
